@@ -16,6 +16,7 @@ public class Swagger2Config {
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
+                .enable(true)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.github.crab2died.controller"))
                 .paths(PathSelectors.any())
