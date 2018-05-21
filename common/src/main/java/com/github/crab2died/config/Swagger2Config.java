@@ -8,8 +8,10 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
+@EnableSwagger2
 public class Swagger2Config {
 
     @Bean
@@ -18,7 +20,7 @@ public class Swagger2Config {
                 .apiInfo(apiInfo())
                 .enable(true)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.github.crab2died.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.github.crab2died.restapi.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

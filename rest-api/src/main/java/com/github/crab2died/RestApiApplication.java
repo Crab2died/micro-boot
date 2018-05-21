@@ -1,11 +1,11 @@
-package com.github.crab2died.restapi;
+package com.github.crab2died;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@EnableSwagger2
+@ComponentScan
 public class RestApiApplication {
 
 	public static void main(String[] args) {
@@ -13,7 +13,7 @@ public class RestApiApplication {
 		//SpringApplication.run(RestApiApplication.class, args);
         new SpringApplicationBuilder(RestApiApplication.class)
                 .properties("spring.config.location=classpath:/application.yaml")
-                .profiles("")
+                //.profiles("")
                 .run(args);
 	}
 }

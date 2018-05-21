@@ -15,6 +15,7 @@
     <developers>
         <developer>
             <name>Crab2Died</name>
+            <email>hwb9588 at 126 dot com</email>
             <roles>
                 <role>all</role>
             </roles>
@@ -42,6 +43,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <swagger.version>2.8.0</swagger.version>
         <druid.version>1.1.9</druid.version>
+        <redis.client.version>2.9.0</redis.client.version>
     </properties>
 
     <parent>
@@ -91,6 +93,18 @@
             </dependency>
 
             <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${redis.client.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.47</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>2.0.2.RELEASE</version>
@@ -118,7 +132,6 @@
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
-                <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.0.2</version>
