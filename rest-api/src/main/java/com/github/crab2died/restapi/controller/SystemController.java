@@ -22,7 +22,7 @@ public class SystemController {
 
     @GetMapping("/sys/ctx")
     @ResponseBody
-    @ApiOperation(value = "App Context", tags = {"App Context",})
+    @ApiOperation(value = "App Context")
     public Object getAppContext(){
 
         testService.redisTest();

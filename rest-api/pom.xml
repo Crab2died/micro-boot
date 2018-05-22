@@ -291,7 +291,7 @@
                                 <doctype>book</doctype>
                                 <toc>left</toc>
                                 <toclevels>3</toclevels>
-                                <numbered></numbered>
+                                <numbered>v1</numbered>
                                 <hardbreaks></hardbreaks>
                                 <sectlinks></sectlinks>
                                 <sectanchors></sectanchors>
