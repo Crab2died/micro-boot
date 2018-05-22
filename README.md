@@ -1,2 +1,2 @@
 # micro-boot
-spring boot 种子项目
+>spring boot 种子项目
