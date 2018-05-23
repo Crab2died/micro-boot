@@ -28,8 +28,8 @@ public class SystemController {
     @ResponseBody
     @ApiOperation(value = "Say Hello", notes = "hello note", httpMethod = "GET")
     @ApiImplicitParams(value = {
-            @ApiImplicitParam(value = "Your Name", name = "name", defaultValue = "Crab2Died", dataType = "string" ),
-            @ApiImplicitParam(value = "Say Hello Pls.", name = "sayHello", defaultValue = "Hello, Friend", dataType = "string" )
+            @ApiImplicitParam(value = "Your Name", name = "name", paramType = "query", defaultValue = "Crab2Died", dataTypeClass = String.class ),
+            @ApiImplicitParam(value = "Say Hello Pls.", name = "sayHello", paramType = "query", defaultValue = "Hello, Friend", dataType = "string" )
     })
     @ApiResponses(value = {
             @ApiResponse(code = org.apache.http.HttpStatus.SC_OK, message = "success request", response = HelloApi.class),
