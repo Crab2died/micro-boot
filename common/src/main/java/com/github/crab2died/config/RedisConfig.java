@@ -32,7 +32,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     ApplicationContext applicationContext;
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         // set key serializer
         StringRedisSerializer serializer = new StringRedisSerializer();
@@ -48,7 +48,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         template.setDefaultSerializer(fastSerializer);
 
         // factory
-        template.setConnectionFactory(applicationContext.getBean(RedisConnectionFactory.class));
+        template.setConnectionFactory(redisConnectionFactory);
         template.afterPropertiesSet();
         return template;
     }
