@@ -1,0 +1,36 @@
+package com.github.crab2died.config.datasource;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.core.PriorityOrdered;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
+@Component
+public class DataSourceServiceAop implements PriorityOrdered {
+
+    private static final Logger logger = LoggerFactory.getLogger(DataSourceServiceAop.class);
+
+    @Before("execution(* com.github.crab2died.restapi.service..*.insert*(..))")
+    public void writeDataSource() {
+        logger.debug("Datasource APO :: write db selected...");
+        DataSourceContextHolder.write();
+    }
+
+    @Before("execution(* com.github.crab2died.restapi.service..*.get*(..))")
+    public void readDataSource() {
+        logger.debug("Datasource APO :: read db selected...");
+        if (!DataSourceEnum.WRITE_DB.type().equals(DataSourceContextHolder.jdbcType())) {
+            DataSourceContextHolder.read();
+        }
+    }
+
+    @Override
+    public int getOrder() {
+        return 1;
+    }
+}

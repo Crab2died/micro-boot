@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.crab2died.restapi.mapper.HelloApiMapper">
+
+    <insert id="insert" >
+
+        INSERT INTO
+          hello_api (
+            id, name, say_hello
+          ) VALUES (
+            #{helloApi.id}, #{helloApi.name}, #{helloApi.sayHello}
+          )
+
+    </insert>
+
+    <select id="getHello" parameterType="map" resultType="com.github.crab2died.restapi.pojo.HelloApi">
+        SELECT
+          id,
+          name,
+          say_hello sayHello
+        FROM
+          hello_api
+        WHERE
+          id = #{id}
+    </select>
+</mapper>

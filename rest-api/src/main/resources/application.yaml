@@ -3,25 +3,68 @@ server:
   port: 8080
 
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/micro-boot?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      max-active: 3
-      min-idle: 1
-      max-wait: 60000
-      initial-size: 1
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/micro-boot?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+#    username: root
+#    password: 123456
+#    driver-class-name: com.mysql.jdbc.Driver
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    druid:
+#      max-active: 3
+#      min-idle: 1
+#      max-wait: 60000
+#      initial-size: 1
+#      filters:
   redis:
     host: 127.0.0.1
     port: 6379
     database: 1
 
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    write-db:
+      url: jdbc:mysql://localhost:3306/micro-boot?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+      max-active: 3
+      min-idle: 1
+      max-wait: 60000
+      initial-size: 1
+      useGlobalDataSourceStat: true
+      druid:
+        filters: stat
+
+    read01-db:
+      url: jdbc:mysql://localhost:3306/micro-boot?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+      max-active: 3
+      min-idle: 1
+      max-wait: 60000
+      initial-size: 1
+      useGlobalDataSourceStat: true
+      druid:
+        filters: stat
+
+    read02-db:
+      url: jdbc:mysql://localhost:3306/micro-boot?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+      max-active: 3
+      min-idle: 1
+      max-wait: 60000
+      initial-size: 1
+      useGlobalDataSourceStat: true
+      druid:
+        filters: stat
+
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.github.crab2died.domain
+  type-aliases-package: com.github.crab2died
 
 logging:
   file: /logs/micro-boot/micro-boot.log
