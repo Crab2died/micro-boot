@@ -23,21 +23,21 @@ public class DataSourceConfig {
     @Bean("writeDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.write-db")
     public DataSource writeDataSource(){
-        logger.info("-----------------Datasource Write DB initialized---------------------");
+        logger.info("-----------------Datasource Write DB inited---------------------");
         return DruidDataSourceBuilder.create().build();
     }
 
     @Bean("read01DataSource")
     @ConfigurationProperties(prefix = "spring.datasource.read01-db")
     public DataSource read01DataSource(){
-        logger.info("----------------Datasource Read DB-01 initialized-------------------");
+        logger.info("----------------Datasource Read DB-01 inited-------------------");
         return DruidDataSourceBuilder.create().build();
     }
 
     @Bean("read02DataSource")
     @ConfigurationProperties(prefix = "spring.datasource.read02-db")
     public DataSource read02DataSource(){
-        logger.info("----------------Datasource Read DB-02 initialized-------------------");
+        logger.info("----------------Datasource Read DB-02 inited-------------------");
         return DruidDataSourceBuilder.create().build();
     }
 
