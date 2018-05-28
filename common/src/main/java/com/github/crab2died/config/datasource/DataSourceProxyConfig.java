@@ -63,13 +63,14 @@ public class DataSourceProxyConfig extends MybatisAutoConfiguration {
             @Override
             protected Object determineCurrentLookupKey() {
                 String type = DataSourceContextHolder.jdbcType();
-                if (null == type){
-                    throw new NullPointerException();
-                }
-                if (type.equals(DataSourceEnum.WRITE_DB.type())){
+//                if (null == type) {
+//                    throw new NullPointerException();
+//                }
+                if (null != type && type.equals(DataSourceEnum.WRITE_DB.type())) {
                     log.info("Inherited write datasource ==> " + DataSourceEnum.WRITE_DB.type());
                     return DataSourceEnum.WRITE_DB.type();
                 }
+                // simple load balance
                 String targetDb = DataSourceEnum.READE_DB.type() + ((new Random().nextInt(1000)) % 2 + 1);
                 log.info("Select the read datasource ==> " + targetDb);
                 return targetDb;
