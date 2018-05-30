@@ -4,6 +4,7 @@ import com.github.crab2died.restapi.pojo.HelloApi;
 import com.github.crab2died.restapi.service.HelloApiService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,20 +29,23 @@ public class ApiController {
 
     @GetMapping("overview")
     @ResponseBody
+    @ApiOperation(value = "Get Overview")
     public Object getOverview() {
         return System.getProperties();
     }
 
     @PostMapping("say-hello")
     @ResponseBody
-    public ResponseEntity<Void> sayHello(@RequestBody HelloApi helloApi) {
+    @ApiOperation(value = "Say Hello")
+    public ResponseEntity<Void> sayHello(@RequestBody @ApiParam(value = "Hello Api Body", name = "helloApi") HelloApi helloApi) {
         helloApiService.insertHello(helloApi);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/hello/{id}")
     @ResponseBody
-    public ResponseEntity<HelloApi> hello(@PathVariable String id) {
+    @ApiOperation(value = "Hello")
+    public ResponseEntity<HelloApi> hello(@PathVariable @ApiParam(value = "ID.", name = "id") String id) {
         return new ResponseEntity<>(helloApiService.getHello(id), HttpStatus.OK);
     }
 }

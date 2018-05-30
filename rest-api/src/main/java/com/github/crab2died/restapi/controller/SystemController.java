@@ -28,14 +28,14 @@ public class SystemController {
     @ResponseBody
     @ApiOperation(value = "Say Hello", notes = "hello note", httpMethod = "GET")
     @ApiImplicitParams(value = {
-            @ApiImplicitParam(value = "Your Name", name = "name", paramType = "query", defaultValue = "Crab2Died", dataTypeClass = String.class),
+            @ApiImplicitParam(value = "Your Name", name = "name", paramType = "query", defaultValue = "Crab2Died", dataType = "string"),
             @ApiImplicitParam(value = "Say Hello Pls.", name = "sayHello", paramType = "query", defaultValue = "Hello, Friend", dataType = "string")
     })
     @ApiResponses(value = {
             @ApiResponse(code = org.apache.http.HttpStatus.SC_OK, message = "success request", response = HelloApi.class),
             @ApiResponse(code = org.apache.http.HttpStatus.SC_BAD_REQUEST, message = "bad request")
     })
-    public ResponseEntity<HelloApi> sayHello(@ApiParam(value = "Hello Model", name = "hello api") HelloApi helloApi) {
+    public ResponseEntity<HelloApi> sayHello(@ApiParam(value = "Hello Model", name = "hello api", type = "object") HelloApi helloApi) {
         if (null == helloApi) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
