@@ -182,10 +182,10 @@
                                         <title>Micro Boot API</title>
                                         <version>v1</version>
                                         <description>
-                                            RESTFul API, https://github.com/Crab2died
+                                            RESTFul API, https://github.com/Crab2died/micro-boot
                                         </description>
                                         <termsOfService>
-                                            http://www.github.com/kongchen/swagger-maven-plugin
+                                            https://github.com/Crab2died
                                         </termsOfService>
                                         <contact>
                                             <email>hwb9588@126.com</email>
