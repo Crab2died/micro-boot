@@ -31,7 +31,7 @@ public class Swagger2Config {
                 .title("Micro Boot API")
                 .description("RESTFul API, https://github.com/Crab2died")
                 .termsOfServiceUrl("https://github.com/Crab2died")
-                .version("1.0")
+                .version("v1.0")
                 .build();
     }
 

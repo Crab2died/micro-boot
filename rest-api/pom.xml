@@ -80,10 +80,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -291,10 +288,7 @@
                                 <doctype>book</doctype>
                                 <toc>left</toc>
                                 <toclevels>3</toclevels>
-                                <numbered>v1</numbered>
-                                <hardbreaks></hardbreaks>
-                                <sectlinks></sectlinks>
-                                <sectanchors></sectanchors>
+                                <numbered>v1.0</numbered>
                                 <generated>${generated.asciidoc.directory}</generated>
                             </attributes>
                         </configuration>
