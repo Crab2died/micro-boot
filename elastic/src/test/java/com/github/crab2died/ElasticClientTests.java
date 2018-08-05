@@ -29,8 +29,6 @@ public class ElasticClientTests {
 
     private Client client;
 
-    private String script = "";
-
     @Before
     public void initClient() throws UnknownHostException {
 
