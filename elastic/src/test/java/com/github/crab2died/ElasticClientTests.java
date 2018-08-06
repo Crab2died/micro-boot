@@ -36,10 +36,11 @@ public class ElasticClientTests {
                 .put("cluster.name", "elastic-app")
                 .put("client.transport.sniff", true)
                 .build();
-        InetSocketTransportAddress transportAddress = new InetSocketTransportAddress(InetAddress.getByName("127.0.0.1"), 9300);
-
+        InetSocketTransportAddress transportAddress1 = new InetSocketTransportAddress(InetAddress.getByName("127.0.0.1"), 9300);
+        InetSocketTransportAddress transportAddress2 = new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300);
         client = new PreBuiltTransportClient(settings)
-                .addTransportAddress(transportAddress);
+                .addTransportAddress(transportAddress1)
+                .addTransportAddress(transportAddress2);
     }
 
     @After
@@ -61,11 +62,11 @@ public class ElasticClientTests {
     }
 
     @Test
-    public void insetSample() throws InterruptedException {
+    public void insertSample() throws InterruptedException {
         AtomicInteger count = new AtomicInteger(0);
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        ExecutorService executorService = Executors.newFixedThreadPool(20);
         long time = System.currentTimeMillis();
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 1000000; i++) {
             String callId = UUID.randomUUID().toString();
             int callHash = callId.hashCode() % 2;
             callHash = callHash < 0 ? -callHash : callHash;
@@ -114,7 +115,7 @@ public class ElasticClientTests {
                         e.printStackTrace();
                     }
                 });
-                TimeUnit.MILLISECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(35);
             }
         }
         executorService.shutdown();
