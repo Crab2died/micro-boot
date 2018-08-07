@@ -2,7 +2,7 @@ package com.github.crab2died.config.datasource;
 
 public enum DataSourceEnum {
 
-    /* reade db*/
+    /** reade db*/
     READE_DB {
         @Override
         protected String type() {
@@ -10,7 +10,7 @@ public enum DataSourceEnum {
         }
     },
 
-    /* write & read db*/
+    /** write & read db*/
     WRITE_DB {
         @Override
         protected String type() {

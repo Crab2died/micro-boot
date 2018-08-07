@@ -3,11 +3,14 @@ package com.github.crab2died;
 import com.alibaba.fastjson.JSON;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.action.update.UpdateRequestBuilder;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.script.Script;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.junit.After;
@@ -66,7 +69,7 @@ public class ElasticClientTests {
         AtomicInteger count = new AtomicInteger(0);
         ExecutorService executorService = Executors.newFixedThreadPool(20);
         long time = System.currentTimeMillis();
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 100000; i++) {
             String callId = UUID.randomUUID().toString();
             int callHash = callId.hashCode() % 2;
             callHash = callHash < 0 ? -callHash : callHash;
@@ -94,23 +97,28 @@ public class ElasticClientTests {
                         }
                         Map<String, Object> map = CallBuilder.obj2Map(callLog);
                         map.put("mos", mos);
+                        Script script = CallBuilder.script(map);
+                        UpdateRequest request = new UpdateRequest("call-log-2018-08", "call_log", callLog.getCallId());
+                        request.routing(callLog.getCallId()).script(script).upsert(JSON.toJSONString(callLog), XContentType.JSON);
                         try {
-                            client.prepareUpdate("call-log-2018-08", "call_log", callLog.getCallId())
-                                    //.setDoc(JSON.parseObject(JSON.toJSONString(callLog)))
-                                    .setScript(CallBuilder.script(map))
-                                    .setUpsert(CallBuilder.obj2Map(callLog))
-                                    .setRouting(callLog.getCallId())
-                                    .get();
+//                            client.prepareUpdate("call-log-2018-08", "call_log", callLog.getCallId())
+//                                    //.setDoc(JSON.parseObject(JSON.toJSONString(callLog)))
+//                                    .setScript(script)
+//                                    .setUpsert(CallBuilder.obj2Map(callLog))
+//                                    .setRouting(callLog.getCallId())
+//                                    .get();
+                            client.update(request).get();
+                            System.out.println(count.incrementAndGet() + " => " + JSON.toJSONString(callLog));
                         } catch (Exception e) {
-                            client.prepareUpdate("call-log-2018-08", "call_log", callLog.getCallId())
-                                    //.setDoc(JSON.parseObject(JSON.toJSONString(callLog)))
-                                    .setScript(CallBuilder.script(map))
-                                    .setUpsert(CallBuilder.obj2Map(callLog))
-                                    .setRouting(callLog.getCallId())
-                                    .get();
+//                            client.prepareUpdate("call-log-2018-08", "call_log", callLog.getCallId())
+//                                    //.setDoc(JSON.parseObject(JSON.toJSONString(callLog)))
+//                                    .setScript(script)
+//                                    .setUpsert(CallBuilder.obj2Map(callLog))
+//                                    .setRouting(callLog.getCallId())
+//                                    .get();
+                            client.update(request).get();
+                            System.out.println(count.incrementAndGet() + " [retry]=> " + JSON.toJSONString(callLog));
                         }
-                        System.out.println(JSON.toJSONString(callLog));
-                        count.getAndIncrement();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -124,7 +132,7 @@ public class ElasticClientTests {
                 break;
             }
         }
-        System.out.println("insert => " + count + ", take time : " + (System.currentTimeMillis() - time) / 1000);
+        System.out.println("insert => " + count.get() + ", take time : " + (System.currentTimeMillis() - time) / 1000);
     }
 
     @Test
