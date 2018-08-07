@@ -1,0 +1,345 @@
+PUT http://localhost:9200/call-log-*/call_sample/_mapping
+{
+  "call_sample": {
+  	"_all": { "enabled": false }
+    "properties": {
+	  "time":{"type":"date"},
+      "call_id": {
+        "type": "keyword"
+      },
+      "account_id": {
+        "type": "keyword"
+      },
+      "user_id": {
+        "type": "keyword"
+      },
+      "ext_id": {
+        "type": "keyword"
+      },
+      "ext_num": {
+        "type": "integer"
+      },
+      "call_time": {
+        "type": "date"
+      },
+      "direction": {
+        "type": "integer"
+      },
+      "duration": {
+        "type": "integer"
+      },
+      "phone_number": {
+        "type": "keyword"
+      },
+      "avg_mos": {
+        "type": "float"
+      },
+      "min_mos": {
+        "type": "float"
+      },
+      "avg_jitter": {
+        "type": "integer"
+      },
+      "max_jitter": {
+        "type": "integer"
+      },
+      "packet_loss_rate": {
+        "type": "float"
+      },
+      "packet_loss_total": {
+        "type": "integer"
+      },
+      "device_type": {
+        "type": "integer"
+      },
+      "device_model": {
+        "type": "text"
+      },
+      "ip": {
+        "type": "text"
+      },
+      "codec": {
+        "type": "integer"
+      },
+      "network": {
+        "type": "integer"
+      },
+      "isp": {
+        "type": "keyword"
+      },
+      "location": {
+        "type": "text"
+      }
+    }
+  }
+}
+
+PUT http://localhost:9200/call-log-*/call_log/_mapping
+{
+    "call_log":{
+	    "_all": { "enabled": false }
+        "properties":{
+            "call_time":{
+                "type":"date"
+            },
+            "call_id":{
+                "type":"keyword"
+            },
+            "mos":{
+                "type":"float"
+            },
+            "duration":{
+                "type":"integer"
+            },
+            "from_account_id":{
+                "type":"keyword"
+            },
+            "from_user_id":{
+                "type":"keyword"
+            },
+            "from_ext_id":{
+                "type":"keyword"
+            },
+            "from_ext_num":{
+                "type":"integer"
+            },
+            "from_phone_number":{
+                "type":"keyword"
+            },
+            "from_avg_mos":{
+                "type":"float"
+            },
+            "from_min_mos":{
+                "type":"float"
+            },
+            "from_avg_jitter":{
+                "type":"integer"
+            },
+            "from_max_jitter":{
+                "type":"integer"
+            },
+            "from_packet_loss_rate":{
+                "type":"float"
+            },
+            "from_packet_loss_total":{
+                "type":"integer"
+            },
+            "from_device_type":{
+                "type":"integer"
+            },
+            "from_device_model":{
+                "type":"text"
+            },
+            "from_ip":{
+                "type":"text"
+            },
+            "from_codec":{
+                "type":"integer"
+            },
+            "from_network":{
+                "type":"integer"
+            },
+            "from_isp":{
+                "type":"keyword"
+            },
+            "from_location":{
+                "type":"text"
+            },
+            "to_account_id":{
+                "type":"keyword"
+            },
+            "to_user_id":{
+                "type":"keyword"
+            },
+            "to_ext_id":{
+                "type":"keyword"
+            },
+            "to_ext_num":{
+                "type":"integer"
+            },
+            "to_phone_number":{
+                "type":"keyword"
+            },
+            "to_avg_mos":{
+                "type":"float"
+            },
+            "to_min_mos":{
+                "type":"float"
+            },
+            "to_avg_jitter":{
+                "type":"integer"
+            },
+            "to_max_jitter":{
+                "type":"integer"
+            },
+            "to_packet_loss_rate":{
+                "type":"float"
+            },
+            "to_packet_loss_total":{
+                "type":"integer"
+            },
+            "to_device_type":{
+                "type":"integer"
+            },
+            "to_device_model":{
+                "type":"text"
+            },
+            "to_ip":{
+                "type":"text"
+            },
+            "to_codec":{
+                "type":"integer"
+            },
+            "to_network":{
+                "type":"integer"
+            },
+            "to_isp":{
+                "type":"keyword"
+            },
+            "to_location":{
+                "type":"text"
+            }
+        }
+    }
+}
+
+POST http://localhost:9200/call-log-2018-08/call_sample/0z8R9WQBtsabA1QJXOh1
+{
+  "time":1533120726000,
+  "call_id": "f1534493-f53a-48f9-bb5d-f53459095969",
+  "account_id": "A-00001",
+  "user_id": "U-0000101",
+  "ext_id": "E-0000101",
+  "ext_num": 120,
+  "call_time": 1533119726000,
+  "direction": 0,
+  "duration": 567112,
+  "phone_number": "18921212311",
+  "avg_mos": 3.71,
+  "min_mos": 1.27,
+  "avg_jitter": 182,
+  "max_jitter": 1521,
+  "packet_loss_rate": 0.018,
+  "packet_loss_total": 762,
+  "device_type": 1,
+  "device_model": "version 1.271.12",
+  "ip": "10.52.12.18",
+  "codec": 1,
+  "network": 1,
+  "isp": "CMCC",
+  "location": "HeFei,China"
+}
+
+
+
+
+{
+    "call_time":1533119726000,
+    "call_id":"f1534493-f53a-48f9-bb5d-f53459095969",
+    "mos":2.41,
+    "duration":567112,
+    "from_account_id":"A-00001",
+    "from_user_id":"U-0000101",
+    "from_ext_id":"E-0000101",
+    "from_ext_num":120,
+    "from_phone_number":"18921212311",
+    "from_avg_mos":3.71,
+    "from_min_mos":1.27,
+    "from_avg_jitter":182,
+    "from_max_jitter":1521,
+    "from_packet_loss_rate":0.018,
+    "from_packet_loss_total":762,
+    "from_device_type":1,
+    "from_device_model":"version 1.271.12",
+    "from_ip":"10.52.12.18",
+    "from_codec":1,
+    "from_network":1,
+    "from_isp":"CMCC",
+    "from_location":"HeFei,China",
+    "to_account_id":"A-00002",
+    "to_user_id":"U-0000201",
+    "to_ext_id":"E-0000201",
+    "to_ext_num":110,
+    "to_phone_number":"15162819213",
+    "to_avg_mos":2.41,
+    "to_min_mos":1.17,
+    "to_avg_jitter":231,
+    "to_max_jitter":2710,
+    "to_packet_loss_rate":0.048,
+    "to_packet_loss_total":762,
+    "to_device_type":2,
+    "to_device_model":"version 12.121",
+    "to_ip":"81.21.21.11",
+    "to_codec":2,
+    "to_network":3,
+    "to_isp":"CMCC",
+    "to_location":"HangZhou,China"
+}
+
+
+e8fb45cd-f33a-4169-b0f7-a7f565e94792=>if (ctx._source.mos > params.mos) {ctx._source.mos = params.mos}ctx._source.to_ext_id = params.to_ext_id;ctx._source.to_packet_loss_total = params.to_packet_loss_total;ctx._source.from_ext_num = params.from_ext_num;ctx._source.to_phone_number = params.to_phone_number;ctx._source.to_ext_num = params.to_ext_num;ctx._source.from_packet_loss_total = params.from_packet_loss_total;ctx._source.from_max_jitter = params.from_max_jitter;ctx._source.to_codec = params.to_codec;ctx._source.to_network = params.to_network;ctx._source.from_ip = params.from_ip;ctx._source.duration = params.duration;ctx._source.from_network = params.from_network;ctx._source.to_min_mos = params.to_min_mos;ctx._source.from_device_type = params.from_device_type;ctx._source.to_account_id = params.to_account_id;ctx._source.to_avg_mos = params.to_avg_mos;ctx._source.from_ext_id = params.from_ext_id;ctx._source.from_avg_mos = params.from_avg_mos;ctx._source.to_location = params.to_location;ctx._source.from_min_mos = params.from_min_mos;ctx._source.to_packet_loss_rote = params.to_packet_loss_rote;ctx._source.from_location = params.from_location;ctx._source.from_user_id = params.from_user_id;ctx._source.from_packet_loss_rate = params.from_packet_loss_rate;ctx._source.from_isp = params.from_isp;ctx._source.from_avg_jitter = params.from_avg_jitter;ctx._source.call_time = params.call_time;ctx._source.from_codec = params.from_codec;ctx._source.from_device_model = params.from_device_model;ctx._source.call_id = params.call_id;ctx._source.to_user_id = params.to_user_id;ctx._source.to_avg_jitter = params.to_avg_jitter;ctx._source.to_isp = params.to_isp;ctx._source.to_device_type = params.to_device_type;ctx._source.from_phone_number = params.from_phone_number;ctx._source.from_account_id = params.from_account_id;ctx._source.to_ip = params.to_ip;ctx._source.to_device_model = params.to_device_model;ctx._source.to_max_jitter = params.to_max_jitter;
+e8fb45cd-f33a-4169-b0f7-a7f565e94792=>if (ctx._source.mos > params.mos) {ctx._source.mos = params.mos}ctx._source.to_ext_id = params.to_ext_id;ctx._source.to_packet_loss_total = params.to_packet_loss_total;ctx._source.from_ext_num = params.from_ext_num;ctx._source.to_phone_number = params.to_phone_number;ctx._source.to_ext_num = params.to_ext_num;ctx._source.from_packet_loss_total = params.from_packet_loss_total;ctx._source.from_max_jitter = params.from_max_jitter;ctx._source.to_codec = params.to_codec;ctx._source.to_network = params.to_network;ctx._source.from_ip = params.from_ip;ctx._source.duration = params.duration;ctx._source.from_network = params.from_network;ctx._source.to_min_mos = params.to_min_mos;ctx._source.from_device_type = params.from_device_type;ctx._source.to_account_id = params.to_account_id;ctx._source.to_avg_mos = params.to_avg_mos;ctx._source.from_ext_id = params.from_ext_id;ctx._source.from_avg_mos = params.from_avg_mos;ctx._source.to_location = params.to_location;ctx._source.from_min_mos = params.from_min_mos;ctx._source.to_packet_loss_rote = params.to_packet_loss_rote;ctx._source.from_location = params.from_location;ctx._source.from_user_id = params.from_user_id;ctx._source.from_packet_loss_rate = params.from_packet_loss_rate;ctx._source.from_isp = params.from_isp;ctx._source.from_avg_jitter = params.from_avg_jitter;ctx._source.call_time = params.call_time;ctx._source.from_codec = params.from_codec;ctx._source.from_device_model = params.from_device_model;ctx._source.call_id = params.call_id;ctx._source.to_user_id = params.to_user_id;ctx._source.to_avg_jitter = params.to_avg_jitter;ctx._source.to_isp = params.to_isp;ctx._source.to_device_type = params.to_device_type;ctx._source.from_phone_number = params.from_phone_number;ctx._source.from_account_id = params.from_account_id;ctx._source.to_ip = params.to_ip;ctx._source.to_device_model = params.to_device_model;ctx._source.to_max_jitter = params.to_max_jitter;
+
+
+聚合
+{
+  "query": {
+    "range": {
+      "call_time": {
+        "gte": 1533280132072
+      }
+    }
+  },
+  "aggs": {
+    "to_nt_aggs": {
+      "terms": {
+        "field": "from_network"
+      }
+    },
+    "from_nt_aggs": {
+      "terms": {
+        "field": "from_network"
+      }
+    }
+  },
+  "size": 0
+}
+
+{
+  "query": {
+    "range": {
+      "call_time": {
+        "gte": "2018-08-06T23:15:00"
+      }
+    }
+  },
+  "size": 0,
+  "aggs": {
+    "call_id": {
+      "date_histogram": {
+        "field": "call_time",
+        "interval": "1m",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      }
+    }
+  }
+}
+
+
+
+
+{
+  "refresh_interval": "20s"
+}
+
+{
+  "index.max_result_window": 1000000
+}
+
+{
+    "transient" : {
+        "indices.store.throttle.type" : "none" 
+    }
+}
+
+index.translog.flush_threshold_size: "512mb"
