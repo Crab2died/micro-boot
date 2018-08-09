@@ -2,7 +2,7 @@ package com.github.crab2died.configuration;
 
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -48,10 +48,10 @@ public class ElasticConfiguration {
                 .put("client.transport.sniff", true)
                 .build();
         String[] addresses = clusterAddress.split(",");
-        InetSocketTransportAddress[] transportAddress = new InetSocketTransportAddress[addresses.length];
+        TransportAddress[] transportAddress = new TransportAddress[addresses.length];
         for (int i = 0; i < addresses.length; i++) {
             String[] hostAndPort = addresses[i].split(":");
-            transportAddress[i] = new InetSocketTransportAddress(InetAddress.getByName(hostAndPort[0]), Integer.parseInt(hostAndPort[1]));
+            transportAddress[i] = new TransportAddress(InetAddress.getByName(hostAndPort[0]), Integer.parseInt(hostAndPort[1]));
         }
         return new PreBuiltTransportClient(settings)
                 .addTransportAddresses(transportAddress);

@@ -4,10 +4,9 @@ import com.alibaba.fastjson.JSON;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
-import org.elasticsearch.action.update.UpdateRequestBuilder;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.script.Script;
@@ -34,13 +33,12 @@ public class ElasticClientTests {
 
     @Before
     public void initClient() throws UnknownHostException {
-
         Settings settings = Settings.builder()
                 .put("cluster.name", "elastic-app")
                 .put("client.transport.sniff", true)
                 .build();
-        InetSocketTransportAddress transportAddress1 = new InetSocketTransportAddress(InetAddress.getByName("127.0.0.1"), 9300);
-        InetSocketTransportAddress transportAddress2 = new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300);
+        TransportAddress transportAddress1 = new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300);
+        TransportAddress transportAddress2 = new TransportAddress(InetAddress.getByName("localhost"), 9300);
         client = new PreBuiltTransportClient(settings)
                 .addTransportAddress(transportAddress1)
                 .addTransportAddress(transportAddress2);
@@ -150,7 +148,7 @@ public class ElasticClientTests {
         int count = 0;
         while (is.hasNext()) {
             SearchHit hit = is.next();
-            Map<String, Object> source = hit.getSource();
+            Map<String, Object> source = hit.getSourceAsMap();
             if (null != source.get("from_account_id")) {
                 count++;
             }
