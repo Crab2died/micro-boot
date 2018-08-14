@@ -2,12 +2,14 @@ package com.github.crab2died;
 
 import com.alibaba.fastjson.JSON;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.script.Script;
 import org.elasticsearch.search.SearchHit;
@@ -67,7 +69,7 @@ public class ElasticClientTests {
         AtomicInteger count = new AtomicInteger(0);
         ExecutorService executorService = Executors.newFixedThreadPool(20);
         long time = System.currentTimeMillis();
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 1000000; i++) {
             String callId = UUID.randomUUID().toString();
             int callHash = callId.hashCode() % 2;
             callHash = callHash < 0 ? -callHash : callHash;
@@ -121,7 +123,7 @@ public class ElasticClientTests {
                         e.printStackTrace();
                     }
                 });
-                TimeUnit.MILLISECONDS.sleep(35);
+                TimeUnit.MILLISECONDS.sleep(30);
             }
         }
         executorService.shutdown();
@@ -159,4 +161,26 @@ public class ElasticClientTests {
         System.out.println(count);
     }
 
+    @Test
+    public void queryTest(){
+
+
+        SearchRequestBuilder searchRequestBuilder = client.prepareSearch("call-log-2018-08").setTypes("call_log");
+        BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+
+        BoolQueryBuilder queryBuilder01 = QueryBuilders.boolQuery();
+        queryBuilder01
+                .should(QueryBuilders.matchQuery("from_account_id", "A-00001"))
+                .should(QueryBuilders.matchQuery("to_account_id", "A-00001"));
+
+        queryBuilder.must(queryBuilder01);
+        queryBuilder.must(QueryBuilders.rangeQuery("call_time").gte(1533800460000L).lt(1533800580000L));
+
+        searchRequestBuilder.setQuery(queryBuilder);
+        searchRequestBuilder.setSize(10);
+        System.out.println(searchRequestBuilder.toString());
+        SearchResponse resp = searchRequestBuilder.execute().actionGet();
+        System.out.println(resp);
+
+    }
 }
