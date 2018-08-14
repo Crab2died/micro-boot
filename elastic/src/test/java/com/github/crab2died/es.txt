@@ -1,7 +1,7 @@
 PUT http://localhost:9200/call-log-*/call_sample/_mapping
 {
   "call_sample": {
-  	"_all": { "enabled": false }
+  	"_all": { "enabled": false },
     "properties": {
 	  "time":{"type":"date"},
       "call_id": {
@@ -50,7 +50,7 @@ PUT http://localhost:9200/call-log-*/call_sample/_mapping
         "type": "integer"
       },
       "device_type": {
-        "type": "integer"
+        "type": "keyword"
       },
       "device_model": {
         "type": "text"
@@ -59,10 +59,10 @@ PUT http://localhost:9200/call-log-*/call_sample/_mapping
         "type": "text"
       },
       "codec": {
-        "type": "integer"
+        "type": "keyword"
       },
       "network": {
-        "type": "integer"
+        "type": "keyword"
       },
       "isp": {
         "type": "keyword"
@@ -77,7 +77,7 @@ PUT http://localhost:9200/call-log-*/call_sample/_mapping
 PUT http://localhost:9200/call-log-*/call_log/_mapping
 {
     "call_log":{
-	    "_all": { "enabled": false }
+	    "_all": { "enabled": false },
         "properties":{
             "call_time":{
                 "type":"date"
@@ -125,7 +125,7 @@ PUT http://localhost:9200/call-log-*/call_log/_mapping
                 "type":"integer"
             },
             "from_device_type":{
-                "type":"integer"
+                "type":"keyword"
             },
             "from_device_model":{
                 "type":"text"
@@ -134,10 +134,10 @@ PUT http://localhost:9200/call-log-*/call_log/_mapping
                 "type":"text"
             },
             "from_codec":{
-                "type":"integer"
+                "type":"keyword"
             },
             "from_network":{
-                "type":"integer"
+                "type":"keyword"
             },
             "from_isp":{
                 "type":"keyword"
@@ -179,7 +179,7 @@ PUT http://localhost:9200/call-log-*/call_log/_mapping
                 "type":"integer"
             },
             "to_device_type":{
-                "type":"integer"
+                "type":"keyword"
             },
             "to_device_model":{
                 "type":"text"
@@ -188,10 +188,10 @@ PUT http://localhost:9200/call-log-*/call_log/_mapping
                 "type":"text"
             },
             "to_codec":{
-                "type":"integer"
+                "type":"keyword"
             },
             "to_network":{
-                "type":"integer"
+                "type":"keyword"
             },
             "to_isp":{
                 "type":"keyword"
