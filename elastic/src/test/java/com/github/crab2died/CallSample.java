@@ -13,13 +13,13 @@ public class CallSample {
     private String userId;
 
     @JSONField(name = "device_type")
-    private String deviceType;
+    private Integer deviceType;
 
     private String isp;
 
-    private String codec;
+    private Integer codec;
 
-    private String network;
+    private Integer network;
 
     private int direction;
 
@@ -92,11 +92,11 @@ public class CallSample {
         this.userId = userId;
     }
 
-    public String getDeviceType() {
+    public Integer getDeviceType() {
         return deviceType;
     }
 
-    public void setDeviceType(String deviceType) {
+    public void setDeviceType(Integer deviceType) {
         this.deviceType = deviceType;
     }
 
@@ -108,19 +108,19 @@ public class CallSample {
         this.isp = isp;
     }
 
-    public String getCodec() {
+    public Integer getCodec() {
         return codec;
     }
 
-    public void setCodec(String codec) {
+    public void setCodec(Integer codec) {
         this.codec = codec;
     }
 
-    public String getNetwork() {
+    public Integer getNetwork() {
         return network;
     }
 
-    public void setNetwork(String network) {
+    public void setNetwork(Integer network) {
         this.network = network;
     }
 

@@ -1,11 +1,9 @@
 package com.github.crab2died;
 
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import org.elasticsearch.script.Script;
 import org.elasticsearch.script.ScriptType;
-import org.junit.Test;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -20,9 +18,9 @@ public class CallBuilder {
             "U-000009", "U-000010", "U-000011", "U-000012", "U-000013", "U-000014", "U-000015"};
     private static final String[] EXT = {"E-000001", "E-000002", "E-000003", "E-000004", "E-000005", "E-000006", "E-000007", "E-000008",
             "E-000009", "E-000010", "E-000011", "E-000012", "E-000013", "E-000014", "E-000015"};
-    private static final String[] CODEC = {"OPUS", "G729", "G722", "G711"};
-    private static final String[] NT = {"3G", "4G", "WIFI", "wired", "Other"};
-    private static final String[] DEVICE = {"HardPhone", "MobileClient", "DesktopClient"};
+    private static final Integer[] CODEC = {1, 2, 3, 4};//{"OPUS", "G729", "G722", "G711"};
+    private static final Integer[] NT = {1, 2, 3, 4, 5};//{"3G", "4G", "WIFI", "wired"};
+    private static final Integer[] DEVICE = {1, 2, 3};//{"HardPhone", "MobileClient", "DesktopClient"};
     private static final String[] PHONE = {"1253211", "10551876251", "17865231121", "152345617", "7826312", "19732121", "3457891", "13567312"};
     private static final String[] ISP = {"CMCC", "Earthlink", "MSN", "AOL", "Verizon"};
     private static final String[] IP = {"172.12.67.12", "10.27.121.2", "24.121.3.11", "78.129.78.11", "92.15.7.132", "72.182.12.123"};
@@ -233,18 +231,4 @@ public class CallBuilder {
         return new Script(ScriptType.INLINE, Script.DEFAULT_SCRIPT_LANG, sb.toString(), map);
     }
 
-
-    @Test
-    public void jsonTest() throws Exception {
-//        CallLog callLog = CallBuilder.buildCallLog(UUID.randomUUID().toString(), System.currentTimeMillis(), 2, 0);
-//        System.out.println(JSON.toJSONString(callLog));
-        String callId = UUID.randomUUID().toString();
-        CallSample sample0 = CallBuilder.buildCallSample(callId, System.currentTimeMillis(), 2, 0);
-        System.out.println(JSON.toJSONString(sample0));
-        CallSample sample1 = CallBuilder.buildCallSample(callId, System.currentTimeMillis(), 3, 1);
-        System.out.println(JSON.toJSONString(sample1));
-//        Map map = CallBuilder.obj2Map(callLog);
-//        System.out.println(map);
-        //System.out.println(JSON.toJSONString(CallBuilder.buildCallLog(UUID.randomUUID().toString(), System.currentTimeMillis(), 2, 0)));
-    }
 }

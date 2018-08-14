@@ -42,16 +42,16 @@ public class CallLog {
     private String fromIsp;
 
     @JSONField(name = "from_network")
-    private String fromNetwork;
+    private Integer fromNetwork;
 
     @JSONField(name = "from_device_type")
-    private String fromDeviceType;
+    private Integer fromDeviceType;
 
     @JSONField(name = "from_device_model")
     private String fromDeviceModel;
 
     @JSONField(name = "from_codec")
-    private String fromCodec;
+    private Integer fromCodec;
 
     @JSONField(name = "from_avg_jitter")
     private Integer fromAvgJitter;
@@ -96,16 +96,16 @@ public class CallLog {
     private String toLocation;
 
     @JSONField(name = "to_network")
-    private String toNetwork;
+    private Integer toNetwork;
 
     @JSONField(name = "to_device_type")
-    private String toDeviceType;
+    private Integer toDeviceType;
 
     @JSONField(name = "to_device_model")
     private String toDeviceModel;
 
     @JSONField(name = "to_codec")
-    private String toCodec;
+    private Integer toCodec;
 
     @JSONField(name = "to_avg_jitter")
     private Integer toAvgJitter;
@@ -229,19 +229,19 @@ public class CallLog {
         this.fromIsp = fromIsp;
     }
 
-    public String getFromNetwork() {
+    public Integer getFromNetwork() {
         return fromNetwork;
     }
 
-    public void setFromNetwork(String fromNetwork) {
+    public void setFromNetwork(Integer fromNetwork) {
         this.fromNetwork = fromNetwork;
     }
 
-    public String getFromDeviceType() {
+    public Integer getFromDeviceType() {
         return fromDeviceType;
     }
 
-    public void setFromDeviceType(String fromDeviceType) {
+    public void setFromDeviceType(Integer fromDeviceType) {
         this.fromDeviceType = fromDeviceType;
     }
 
@@ -253,11 +253,11 @@ public class CallLog {
         this.fromDeviceModel = fromDeviceModel;
     }
 
-    public String getFromCodec() {
+    public Integer getFromCodec() {
         return fromCodec;
     }
 
-    public void setFromCodec(String fromCodec) {
+    public void setFromCodec(Integer fromCodec) {
         this.fromCodec = fromCodec;
     }
 
@@ -373,19 +373,19 @@ public class CallLog {
         this.toLocation = toLocation;
     }
 
-    public String getToNetwork() {
+    public Integer getToNetwork() {
         return toNetwork;
     }
 
-    public void setToNetwork(String toNetwork) {
+    public void setToNetwork(Integer toNetwork) {
         this.toNetwork = toNetwork;
     }
 
-    public String getToDeviceType() {
+    public Integer getToDeviceType() {
         return toDeviceType;
     }
 
-    public void setToDeviceType(String toDeviceType) {
+    public void setToDeviceType(Integer toDeviceType) {
         this.toDeviceType = toDeviceType;
     }
 
@@ -397,11 +397,11 @@ public class CallLog {
         this.toDeviceModel = toDeviceModel;
     }
 
-    public String getToCodec() {
+    public Integer getToCodec() {
         return toCodec;
     }
 
-    public void setToCodec(String toCodec) {
+    public void setToCodec(Integer toCodec) {
         this.toCodec = toCodec;
     }
 
