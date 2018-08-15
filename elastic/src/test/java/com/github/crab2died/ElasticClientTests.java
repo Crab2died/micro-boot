@@ -1,6 +1,9 @@
 package com.github.crab2died;
 
 import com.alibaba.fastjson.JSON;
+import org.elasticsearch.action.admin.indices.alias.exists.AliasesExistResponse;
+import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
+import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -69,7 +72,7 @@ public class ElasticClientTests {
         AtomicInteger count = new AtomicInteger(0);
         ExecutorService executorService = Executors.newFixedThreadPool(20);
         long time = System.currentTimeMillis();
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 500000; i++) {
             String callId = UUID.randomUUID().toString();
             int callHash = callId.hashCode() % 2;
             callHash = callHash < 0 ? -callHash : callHash;
@@ -123,7 +126,7 @@ public class ElasticClientTests {
                         e.printStackTrace();
                     }
                 });
-                TimeUnit.MILLISECONDS.sleep(30);
+                TimeUnit.MILLISECONDS.sleep(20);
             }
         }
         executorService.shutdown();
@@ -162,8 +165,7 @@ public class ElasticClientTests {
     }
 
     @Test
-    public void queryTest(){
-
+    public void queryTest() {
 
         SearchRequestBuilder searchRequestBuilder = client.prepareSearch("call-log-2018-08").setTypes("call_log");
         BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
@@ -183,4 +185,159 @@ public class ElasticClientTests {
         System.out.println(resp);
 
     }
+
+    @Test
+    public void indicesTest() {
+        //client.admin().indices().exists(new IndicesExistsRequest().indices("call-log-2018-10")).actionGet();
+        IndicesExistsResponse exist = client.admin().indices().prepareExists("call-log-2018-07").get();
+        if (!exist.isExists()) {
+            CreateIndexResponse createResp = client.admin().indices().prepareCreate("call-log-2018-07")
+                    .setSettings(Settings.builder()
+                            .put("index.number_of_shards", 5)
+                            .put("index.number_of_replicas", 0)
+                            .put("refresh_interval", "20s")
+                            .put("max_result_window", 1000000)
+                    ).addMapping("call_log", CALL_LOG_MAPPING, XContentType.JSON)
+                    .setAliases(ALIASES)
+                    .get();
+        }
+        // IndicesAliasesResponse resp = client.admin().indices().prepareAliases().removeAlias("call-log-2018-10", "call_logs").get();
+        AliasesExistResponse result = client.admin().indices().prepareAliasesExist("call_logs").addIndices("call-log-2018-10").get();
+        System.out.println(result.isExists());
+        // System.out.println(resp.isAcknowledged());
+    }
+
+    private static final String ALIASES = "{\n" +
+            " \"call_logs\":{}\n" +
+            "}";
+
+    private static final String CALL_LOG_MAPPING = " {\n" +
+            "    \"call_log\": {\n" +
+            "      \"_all\": {\n" +
+            "        \"enabled\": false\n" +
+            "      },\n" +
+            "      \"properties\": {\n" +
+            "        \"call_time\": {\n" +
+            "          \"type\": \"date\"\n" +
+            "        },\n" +
+            "        \"call_id\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"mos\": {\n" +
+            "          \"type\": \"float\"\n" +
+            "        },\n" +
+            "        \"duration\": {\n" +
+            "          \"type\": \"integer\"\n" +
+            "        },\n" +
+            "        \"from_account_id\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"from_user_id\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"from_ext_id\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"from_ext_num\": {\n" +
+            "          \"type\": \"integer\"\n" +
+            "        },\n" +
+            "        \"from_phone_number\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"from_avg_mos\": {\n" +
+            "          \"type\": \"float\"\n" +
+            "        },\n" +
+            "        \"from_min_mos\": {\n" +
+            "          \"type\": \"float\"\n" +
+            "        },\n" +
+            "        \"from_avg_jitter\": {\n" +
+            "          \"type\": \"integer\"\n" +
+            "        },\n" +
+            "        \"from_max_jitter\": {\n" +
+            "          \"type\": \"integer\"\n" +
+            "        },\n" +
+            "        \"from_packet_loss_rate\": {\n" +
+            "          \"type\": \"float\"\n" +
+            "        },\n" +
+            "        \"from_packet_loss_total\": {\n" +
+            "          \"type\": \"integer\"\n" +
+            "        },\n" +
+            "        \"from_device_type\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"from_device_model\": {\n" +
+            "          \"type\": \"text\"\n" +
+            "        },\n" +
+            "        \"from_ip\": {\n" +
+            "          \"type\": \"text\"\n" +
+            "        },\n" +
+            "        \"from_codec\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"from_network\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"from_isp\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"from_location\": {\n" +
+            "          \"type\": \"text\"\n" +
+            "        },\n" +
+            "        \"to_account_id\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"to_user_id\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"to_ext_id\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"to_ext_num\": {\n" +
+            "          \"type\": \"integer\"\n" +
+            "        },\n" +
+            "        \"to_phone_number\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"to_avg_mos\": {\n" +
+            "          \"type\": \"float\"\n" +
+            "        },\n" +
+            "        \"to_min_mos\": {\n" +
+            "          \"type\": \"float\"\n" +
+            "        },\n" +
+            "        \"to_avg_jitter\": {\n" +
+            "          \"type\": \"integer\"\n" +
+            "        },\n" +
+            "        \"to_max_jitter\": {\n" +
+            "          \"type\": \"integer\"\n" +
+            "        },\n" +
+            "        \"to_packet_loss_rate\": {\n" +
+            "          \"type\": \"float\"\n" +
+            "        },\n" +
+            "        \"to_packet_loss_total\": {\n" +
+            "          \"type\": \"integer\"\n" +
+            "        },\n" +
+            "        \"to_device_type\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"to_device_model\": {\n" +
+            "          \"type\": \"text\"\n" +
+            "        },\n" +
+            "        \"to_ip\": {\n" +
+            "          \"type\": \"text\"\n" +
+            "        },\n" +
+            "        \"to_codec\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"to_network\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"to_isp\": {\n" +
+            "          \"type\": \"keyword\"\n" +
+            "        },\n" +
+            "        \"to_location\": {\n" +
+            "          \"type\": \"text\"\n" +
+            "        }\n" +
+            "      }\n" +
+            "    }\n" +
+            "}";
 }
