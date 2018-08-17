@@ -61,7 +61,7 @@ public class ElasticClientTests {
     public void insertCallLog() {
 
         CallLog callLog = CallBuilder.buildCallLog(true, true);
-        IndexResponse response = client.prepareIndex("call-log-2018-08", "call_log", callLog.getId())
+        IndexResponse response = client.prepareIndex("call-log-2018-09", "call_log", callLog.getId())
                 .setSource(JSON.toJSONString(callLog), XContentType.JSON)
                 .get();
         System.out.println(response.toString());
@@ -72,7 +72,7 @@ public class ElasticClientTests {
         AtomicInteger count = new AtomicInteger(0);
         ExecutorService executorService = Executors.newFixedThreadPool(20);
         long time = System.currentTimeMillis();
-        for (int i = 0; i < 500000; i++) {
+        for (int i = 0; i < 30000; i++) {
             String callId = UUID.randomUUID().toString();
             int callHash = callId.hashCode() % 2;
             callHash = callHash < 0 ? -callHash : callHash;
@@ -189,16 +189,17 @@ public class ElasticClientTests {
     @Test
     public void indicesTest() {
         //client.admin().indices().exists(new IndicesExistsRequest().indices("call-log-2018-10")).actionGet();
-        IndicesExistsResponse exist = client.admin().indices().prepareExists("call-log-2018-07").get();
+        IndicesExistsResponse exist = client.admin().indices().prepareExists("call-log-2018-10").get();
         if (!exist.isExists()) {
-            CreateIndexResponse createResp = client.admin().indices().prepareCreate("call-log-2018-07")
-                    .setSettings(Settings.builder()
-                            .put("index.number_of_shards", 5)
-                            .put("index.number_of_replicas", 0)
-                            .put("refresh_interval", "20s")
-                            .put("max_result_window", 1000000)
-                    ).addMapping("call_log", CALL_LOG_MAPPING, XContentType.JSON)
-                    .setAliases(ALIASES)
+            CreateIndexResponse createResp = client.admin().indices().prepareCreate("call-log-2018-10")
+//                    .setSettings(Settings.builder()
+//                            .put("index.number_of_shards", 5)
+//                            .put("index.number_of_replicas", 0)
+//                            .put("refresh_interval", "20s")
+//                            .put("max_result_window", 1000000)
+            //        )
+                    .setSource(CALL_LOG_MAPPING, XContentType.JSON)
+            //        .setAliases(ALIASES)
                     .get();
         }
         // IndicesAliasesResponse resp = client.admin().indices().prepareAliases().removeAlias("call-log-2018-10", "call_logs").get();
@@ -211,7 +212,15 @@ public class ElasticClientTests {
             " \"call_logs\":{}\n" +
             "}";
 
-    private static final String CALL_LOG_MAPPING = " {\n" +
+    private static final String CALL_LOG_MAPPING = "{\n" +
+            "  \"settings\": {\n" +
+            "    \"number_of_shards\": 5,\n" +
+            "    \"number_of_replicas\": 0,\n" +
+            "    \"refresh_interval\": \"20s\",\n" +
+            "    \"max_result_window\": 1000000\n" +
+            "  },\n" +
+            "  \"aliases\":{\"call_logs\":{}}," +
+            "  \"mappings\": {\n" +
             "    \"call_log\": {\n" +
             "      \"_all\": {\n" +
             "        \"enabled\": false\n" +
@@ -339,5 +348,6 @@ public class ElasticClientTests {
             "        }\n" +
             "      }\n" +
             "    }\n" +
+            "  }\n" +
             "}";
 }

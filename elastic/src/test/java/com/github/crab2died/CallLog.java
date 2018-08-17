@@ -38,6 +38,9 @@ public class CallLog {
     @JSONField(name = "from_location")
     private String fromLocation;
 
+    @JSONField(name = "from_position")
+    private String fromPosition;
+
     @JSONField(name = "from_isp")
     private String fromIsp;
 
@@ -95,6 +98,9 @@ public class CallLog {
     @JSONField(name = "to_location")
     private String toLocation;
 
+    @JSONField(name = "to_position")
+    private String toPosition;
+
     @JSONField(name = "to_network")
     private String toNetwork;
 
@@ -113,7 +119,7 @@ public class CallLog {
     @JSONField(name = "to_max_jitter")
     private Integer toMaxJitter;
 
-    @JSONField(name = "to_packet_loss_rote")
+    @JSONField(name = "to_packet_loss_rate")
     private Float toPacketLossRate;
 
     @JSONField(name = "to_packet_loss_total")
@@ -219,6 +225,14 @@ public class CallLog {
 
     public void setFromLocation(String fromLocation) {
         this.fromLocation = fromLocation;
+    }
+
+    public String getFromPosition() {
+        return fromPosition;
+    }
+
+    public void setFromPosition(String fromPosition) {
+        this.fromPosition = fromPosition;
     }
 
     public String getFromIsp() {
@@ -371,6 +385,14 @@ public class CallLog {
 
     public void setToLocation(String toLocation) {
         this.toLocation = toLocation;
+    }
+
+    public String getToPosition() {
+        return toPosition;
+    }
+
+    public void setToPosition(String toPosition) {
+        this.toPosition = toPosition;
     }
 
     public String getToNetwork() {

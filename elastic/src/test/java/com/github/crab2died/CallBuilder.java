@@ -27,6 +27,8 @@ public class CallBuilder {
     private static final String[] ISP = {"CMCC", "Earthlink", "MSN", "AOL", "Verizon"};
     private static final String[] IP = {"172.12.67.12", "10.27.121.2", "24.121.3.11", "78.129.78.11", "92.15.7.132", "72.182.12.123"};
     private static final String[] LOCATION = {"HeFei,CN", "HangZhou,CN", "SuZHou,CN", "BeiJing,CN", "California,US", "Texas,US"};
+    private static final Float[] LOT = {10.121F, -91.1233F, 143.123F, 83.124F, -24.124F, 121.13434F, 45.1234F, -6.1232F, -122.1112F, -30.12F};
+    private static final Float[] LAT = {-12.1231F, 76.12234F, 87.1368F, -63.6321F, 52.532F, 43.1282F, -74.241F, 27.986F, -32.112F, -0.1283F};
 
     public static CallLog buildCallLog(boolean from, boolean to) {
         if (!from && !to)
@@ -138,6 +140,7 @@ public class CallBuilder {
             callLog.setFromPhoneNumber(PHONE[random.nextInt(1000) % 8]);
             callLog.setFromNetwork(NT[random.nextInt(1000) % 5]);
             callLog.setFromLocation(LOCATION[random.nextInt(1000) % 6]);
+            callLog.setFromPosition("[" + LOT[random.nextInt(10)] + "," + LAT[random.nextInt(10)] +"]");
             callLog.setFromPacketLossRate(random.nextFloat());
             callLog.setFromPacketLossTotal(random.nextInt(16291));
         }
@@ -162,6 +165,7 @@ public class CallBuilder {
             callLog.setToPhoneNumber(PHONE[random.nextInt(1000) % 8]);
             callLog.setToNetwork(NT[random.nextInt(1000) % 5]);
             callLog.setToLocation(LOCATION[random.nextInt(1000) % 6]);
+            callLog.setToPosition("[" + LOT[random.nextInt(10)] + "," + LAT[random.nextInt(10)] +"]");
             callLog.setToPacketLossRate(random.nextFloat());
             callLog.setToPacketLossTotal(random.nextInt(16291));
         }

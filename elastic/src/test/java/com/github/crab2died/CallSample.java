@@ -53,6 +53,8 @@ public class CallSample {
 
     private String location;
 
+    private String position;
+
     @JSONField(name = "avg_jitter")
     private Integer avgJitter;
 
@@ -65,7 +67,7 @@ public class CallSample {
     @JSONField(name = "packet_loss_total")
     private Integer packetLossTotal;
 
-    @JSONField(name = "eventual")
+    @JSONField(serialize = false)
     private Integer eventual = 0;
 
     public long getTime() {
@@ -218,6 +220,14 @@ public class CallSample {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public Integer getAvgJitter() {

@@ -1,206 +1,239 @@
-PUT http://localhost:9200/call-log-*/call_sample/_mapping
+curl -XPUT http:ES-host:9200/call-log-yyyy-MM -d '
 {
-  "call_sample": {
-  	"_all": { "enabled": false },
-    "properties": {
-	  "time":{"type":"date"},
-      "call_id": {
-        "type": "keyword"
+  "settings": {
+    "number_of_shards": 5,
+    "number_of_replicas": 0,
+    "refresh_interval": "20s",
+    "max_result_window": 1000000
+  },
+  "aliases":{"call_logs":{}},
+  "mappings": {
+    "call_log": {
+      "_all": {
+        "enabled": false
       },
-      "account_id": {
-        "type": "keyword"
-      },
-      "user_id": {
-        "type": "keyword"
-      },
-      "ext_id": {
-        "type": "keyword"
-      },
-      "ext_num": {
-        "type": "integer"
-      },
-      "call_time": {
-        "type": "date"
-      },
-      "direction": {
-        "type": "integer"
-      },
-      "duration": {
-        "type": "integer"
-      },
-      "phone_number": {
-        "type": "keyword"
-      },
-      "avg_mos": {
-        "type": "float"
-      },
-      "min_mos": {
-        "type": "float"
-      },
-      "avg_jitter": {
-        "type": "integer"
-      },
-      "max_jitter": {
-        "type": "integer"
-      },
-      "packet_loss_rate": {
-        "type": "float"
-      },
-      "packet_loss_total": {
-        "type": "integer"
-      },
-      "device_type": {
-        "type": "keyword"
-      },
-      "device_model": {
-        "type": "text"
-      },
-      "ip": {
-        "type": "text"
-      },
-      "codec": {
-        "type": "keyword"
-      },
-      "network": {
-        "type": "keyword"
-      },
-      "isp": {
-        "type": "keyword"
-      },
-      "location": {
-        "type": "text"
+      "properties": {
+        "call_time": {
+          "type": "date"
+        },
+        "call_id": {
+          "type": "keyword"
+        },
+        "mos": {
+          "type": "float"
+        },
+        "duration": {
+          "type": "integer"
+        },
+        "from_account_id": {
+          "type": "keyword"
+        },
+        "from_user_id": {
+          "type": "keyword"
+        },
+        "from_ext_id": {
+          "type": "keyword"
+        },
+        "from_ext_num": {
+          "type": "integer"
+        },
+        "from_phone_number": {
+          "type": "keyword"
+        },
+        "from_avg_mos": {
+          "type": "float"
+        },
+        "from_min_mos": {
+          "type": "float"
+        },
+        "from_avg_jitter": {
+          "type": "integer"
+        },
+        "from_max_jitter": {
+          "type": "integer"
+        },
+        "from_packet_loss_rate": {
+          "type": "float"
+        },
+        "from_packet_loss_total": {
+          "type": "integer"
+        },
+        "from_device_type": {
+          "type": "keyword"
+        },
+        "from_device_model": {
+          "type": "text"
+        },
+        "from_ip": {
+          "type": "text"
+        },
+        "from_codec": {
+          "type": "keyword"
+        },
+        "from_network": {
+          "type": "keyword"
+        },
+        "from_isp": {
+          "type": "keyword"
+        },
+        "from_location": {
+          "type": "text"
+        },
+        "from_position": {
+          "type": "array"
+        },
+        "to_account_id": {
+          "type": "keyword"
+        },
+        "to_user_id": {
+          "type": "keyword"
+        },
+        "to_ext_id": {
+          "type": "keyword"
+        },
+        "to_ext_num": {
+          "type": "integer"
+        },
+        "to_phone_number": {
+          "type": "keyword"
+        },
+        "to_avg_mos": {
+          "type": "float"
+        },
+        "to_min_mos": {
+          "type": "float"
+        },
+        "to_avg_jitter": {
+          "type": "integer"
+        },
+        "to_max_jitter": {
+          "type": "integer"
+        },
+        "to_packet_loss_rate": {
+          "type": "float"
+        },
+        "to_packet_loss_total": {
+          "type": "integer"
+        },
+        "to_device_type": {
+          "type": "keyword"
+        },
+        "to_device_model": {
+          "type": "text"
+        },
+        "to_ip": {
+          "type": "text"
+        },
+        "to_codec": {
+          "type": "keyword"
+        },
+        "to_network": {
+          "type": "keyword"
+        },
+        "to_isp": {
+          "type": "keyword"
+        },
+        "to_location": {
+          "type": "text"
+        },
+        "to_position": {
+          "type": "array"
+        }
       }
     }
   }
 }
 
-PUT http://localhost:9200/call-log-*/call_log/_mapping
+
+curl -XPUT http:ES-host:9200/call-sample-yyyy-MM -d '
 {
-    "call_log":{
-	    "_all": { "enabled": false },
-        "properties":{
-            "call_time":{
-                "type":"date"
-            },
-            "call_id":{
-                "type":"keyword"
-            },
-            "mos":{
-                "type":"float"
-            },
-            "duration":{
-                "type":"integer"
-            },
-            "from_account_id":{
-                "type":"keyword"
-            },
-            "from_user_id":{
-                "type":"keyword"
-            },
-            "from_ext_id":{
-                "type":"keyword"
-            },
-            "from_ext_num":{
-                "type":"integer"
-            },
-            "from_phone_number":{
-                "type":"keyword"
-            },
-            "from_avg_mos":{
-                "type":"float"
-            },
-            "from_min_mos":{
-                "type":"float"
-            },
-            "from_avg_jitter":{
-                "type":"integer"
-            },
-            "from_max_jitter":{
-                "type":"integer"
-            },
-            "from_packet_loss_rate":{
-                "type":"float"
-            },
-            "from_packet_loss_total":{
-                "type":"integer"
-            },
-            "from_device_type":{
-                "type":"keyword"
-            },
-            "from_device_model":{
-                "type":"text"
-            },
-            "from_ip":{
-                "type":"text"
-            },
-            "from_codec":{
-                "type":"keyword"
-            },
-            "from_network":{
-                "type":"keyword"
-            },
-            "from_isp":{
-                "type":"keyword"
-            },
-            "from_location":{
-                "type":"text"
-            },
-            "to_account_id":{
-                "type":"keyword"
-            },
-            "to_user_id":{
-                "type":"keyword"
-            },
-            "to_ext_id":{
-                "type":"keyword"
-            },
-            "to_ext_num":{
-                "type":"integer"
-            },
-            "to_phone_number":{
-                "type":"keyword"
-            },
-            "to_avg_mos":{
-                "type":"float"
-            },
-            "to_min_mos":{
-                "type":"float"
-            },
-            "to_avg_jitter":{
-                "type":"integer"
-            },
-            "to_max_jitter":{
-                "type":"integer"
-            },
-            "to_packet_loss_rate":{
-                "type":"float"
-            },
-            "to_packet_loss_total":{
-                "type":"integer"
-            },
-            "to_device_type":{
-                "type":"keyword"
-            },
-            "to_device_model":{
-                "type":"text"
-            },
-            "to_ip":{
-                "type":"text"
-            },
-            "to_codec":{
-                "type":"keyword"
-            },
-            "to_network":{
-                "type":"keyword"
-            },
-            "to_isp":{
-                "type":"keyword"
-            },
-            "to_location":{
-                "type":"text"
-            }
+  "settings": {
+    "number_of_shards": 5,
+    "number_of_replicas": 0,
+    "refresh_interval": "20s",
+    "max_result_window": 1000000
+  },
+  "mappings": {
+    "call_sample": {
+      "_all": {
+        "enabled": false
+      },
+      "properties": {
+        "time": {
+          "type": "date"
+        },
+        "call_id": {
+          "type": "keyword"
+        },
+        "account_id": {
+          "type": "keyword"
+        },
+        "user_id": {
+          "type": "keyword"
+        },
+        "ext_id": {
+          "type": "keyword"
+        },
+        "ext_num": {
+          "type": "integer"
+        },
+        "call_time": {
+          "type": "date"
+        },
+        "direction": {
+          "type": "integer"
+        },
+        "duration": {
+          "type": "integer"
+        },
+        "phone_number": {
+          "type": "keyword"
+        },
+        "avg_mos": {
+          "type": "float"
+        },
+        "min_mos": {
+          "type": "float"
+        },
+        "avg_jitter": {
+          "type": "integer"
+        },
+        "max_jitter": {
+          "type": "integer"
+        },
+        "packet_loss_rate": {
+          "type": "float"
+        },
+        "packet_loss_total": {
+          "type": "integer"
+        },
+        "device_type": {
+          "type": "keyword"
+        },
+        "device_model": {
+          "type": "text"
+        },
+        "ip": {
+          "type": "text"
+        },
+        "codec": {
+          "type": "keyword"
+        },
+        "network": {
+          "type": "keyword"
+        },
+        "isp": {
+          "type": "keyword"
+        },
+        "location": {
+          "type": "text"
+        },
+        "position": {
+          "type": "geo_point"
         }
+      }
     }
+  }
 }
 
 POST http://localhost:9200/call-log-2018-08/call_sample/0z8R9WQBtsabA1QJXOh1
