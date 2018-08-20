@@ -51,7 +51,7 @@ public class CallSample {
 
     private String ip;
 
-    private String location;
+    private String callerloc;
 
     private String position;
 
@@ -214,12 +214,12 @@ public class CallSample {
         this.ip = ip;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCallerloc() {
+        return callerloc;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setCallerloc(String callerloc) {
+        this.callerloc = callerloc;
     }
 
     public String getPosition() {

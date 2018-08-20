@@ -35,8 +35,8 @@ public class CallLog {
     @JSONField(name = "from_ip")
     private String fromIp;
 
-    @JSONField(name = "from_location")
-    private String fromLocation;
+    @JSONField(name = "from_callerloc")
+    private String fromCallerloc;
 
     @JSONField(name = "from_position")
     private String fromPosition;
@@ -95,8 +95,8 @@ public class CallLog {
     @JSONField(name = "to_ip")
     private String toIp;
 
-    @JSONField(name = "to_location")
-    private String toLocation;
+    @JSONField(name = "to_callerloc")
+    private String toCallerloc;
 
     @JSONField(name = "to_position")
     private String toPosition;
@@ -219,12 +219,12 @@ public class CallLog {
         this.fromIp = fromIp;
     }
 
-    public String getFromLocation() {
-        return fromLocation;
+    public String getFromCallerloc() {
+        return fromCallerloc;
     }
 
-    public void setFromLocation(String fromLocation) {
-        this.fromLocation = fromLocation;
+    public void setFromCallerloc(String fromCallerloc) {
+        this.fromCallerloc = fromCallerloc;
     }
 
     public String getFromPosition() {
@@ -379,12 +379,12 @@ public class CallLog {
         this.toIp = toIp;
     }
 
-    public String getToLocation() {
-        return toLocation;
+    public String getToCallerloc() {
+        return toCallerloc;
     }
 
-    public void setToLocation(String toLocation) {
-        this.toLocation = toLocation;
+    public void setToCallerloc(String toCallerloc) {
+        this.toCallerloc = toCallerloc;
     }
 
     public String getToPosition() {

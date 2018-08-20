@@ -65,7 +65,7 @@ public class CallBuilder {
             callLog.setFromIsp(ISP[fidx % 5]);
             callLog.setFromPhoneNumber(PHONE[fidx % 8]);
             callLog.setFromNetwork(NT[fidx % 5]);
-            callLog.setFromLocation(LOCATION[fidx % 6]);
+            callLog.setFromCallerloc(LOCATION[fidx % 6]);
             callLog.setFromPacketLossRate(random.nextFloat());
             callLog.setFromPacketLossTotal(random.nextInt(16291));
         }
@@ -88,7 +88,7 @@ public class CallBuilder {
             callLog.setToIsp(ISP[tidx % 5]);
             callLog.setToPhoneNumber(PHONE[tidx % 8]);
             callLog.setToNetwork(NT[tidx % 5]);
-            callLog.setToLocation(LOCATION[tidx % 6]);
+            callLog.setToCallerloc(LOCATION[tidx % 6]);
             callLog.setToPacketLossRate(random.nextFloat());
             callLog.setToPacketLossTotal(random.nextInt(16291));
         }
@@ -139,7 +139,7 @@ public class CallBuilder {
             callLog.setFromIsp(ISP[random.nextInt(1000) % 5]);
             callLog.setFromPhoneNumber(PHONE[random.nextInt(1000) % 8]);
             callLog.setFromNetwork(NT[random.nextInt(1000) % 5]);
-            callLog.setFromLocation(LOCATION[random.nextInt(1000) % 6]);
+            callLog.setFromCallerloc(LOCATION[random.nextInt(1000) % 6]);
             callLog.setFromPosition("[" + LOT[random.nextInt(10)] + "," + LAT[random.nextInt(10)] +"]");
             callLog.setFromPacketLossRate(random.nextFloat());
             callLog.setFromPacketLossTotal(random.nextInt(16291));
@@ -164,7 +164,7 @@ public class CallBuilder {
             callLog.setToIsp(ISP[random.nextInt(1000) % 5]);
             callLog.setToPhoneNumber(PHONE[random.nextInt(1000) % 8]);
             callLog.setToNetwork(NT[random.nextInt(1000) % 5]);
-            callLog.setToLocation(LOCATION[random.nextInt(1000) % 6]);
+            callLog.setToCallerloc(LOCATION[random.nextInt(1000) % 6]);
             callLog.setToPosition("[" + LOT[random.nextInt(10)] + "," + LAT[random.nextInt(10)] +"]");
             callLog.setToPacketLossRate(random.nextFloat());
             callLog.setToPacketLossTotal(random.nextInt(16291));
@@ -245,8 +245,13 @@ public class CallBuilder {
         String callId = UUID.randomUUID().toString();
         CallSample sample0 = CallBuilder.buildCallSample(callId, System.currentTimeMillis(), 2, 0);
         System.out.println(JSON.toJSONString(sample0));
+        System.out.println(obj2Map(sample0));
         CallSample sample1 = CallBuilder.buildCallSample(callId, System.currentTimeMillis(), 3, 1);
         System.out.println(JSON.toJSONString(sample1));
+        System.out.println(obj2Map(sample1));
+        CallLog callLog = buildCallLog(true, false);
+        System.out.println(JSON.toJSONString(callLog));
+        System.out.println(obj2Map(callLog));
 //        Map map = CallBuilder.obj2Map(callLog);
 //        System.out.println(map);
         //System.out.println(JSON.toJSONString(CallBuilder.buildCallLog(UUID.randomUUID().toString(), System.currentTimeMillis(), 2, 0)));

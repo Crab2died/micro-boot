@@ -20,7 +20,6 @@ import java.net.UnknownHostException;
 @ConfigurationProperties(prefix = "spring.elastic")
 public class ElasticConfiguration {
 
-
     private String clusterName = "elastic-app";
 
     private String clusterAddress = "localhost:9300";

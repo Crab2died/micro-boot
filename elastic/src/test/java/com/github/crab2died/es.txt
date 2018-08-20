@@ -76,7 +76,7 @@ curl -XPUT http:ES-host:9200/call-log-yyyy-MM -d '
         "from_isp": {
           "type": "keyword"
         },
-        "from_location": {
+        "from_callerloc": {
           "type": "text"
         },
         "from_position": {
@@ -133,7 +133,7 @@ curl -XPUT http:ES-host:9200/call-log-yyyy-MM -d '
         "to_isp": {
           "type": "keyword"
         },
-        "to_location": {
+        "to_callerloc": {
           "type": "text"
         },
         "to_position": {
@@ -225,7 +225,7 @@ curl -XPUT http:ES-host:9200/call-sample-yyyy-MM -d '
         "isp": {
           "type": "keyword"
         },
-        "location": {
+        "callerloc": {
           "type": "text"
         },
         "position": {
@@ -260,7 +260,7 @@ POST http://localhost:9200/call-log-2018-08/call_sample/0z8R9WQBtsabA1QJXOh1
   "codec": 1,
   "network": 1,
   "isp": "CMCC",
-  "location": "HeFei,China"
+  "callerloc": "HeFei,China"
 }
 
 
@@ -288,7 +288,7 @@ POST http://localhost:9200/call-log-2018-08/call_sample/0z8R9WQBtsabA1QJXOh1
     "from_codec":1,
     "from_network":1,
     "from_isp":"CMCC",
-    "from_location":"HeFei,China",
+    "from_callerloc":"HeFei,China",
     "to_account_id":"A-00002",
     "to_user_id":"U-0000201",
     "to_ext_id":"E-0000201",
@@ -306,12 +306,12 @@ POST http://localhost:9200/call-log-2018-08/call_sample/0z8R9WQBtsabA1QJXOh1
     "to_codec":2,
     "to_network":3,
     "to_isp":"CMCC",
-    "to_location":"HangZhou,China"
+    "to_callerloc":"HangZhou,China"
 }
 
 
-e8fb45cd-f33a-4169-b0f7-a7f565e94792=>if (ctx._source.mos > params.mos) {ctx._source.mos = params.mos}ctx._source.to_ext_id = params.to_ext_id;ctx._source.to_packet_loss_total = params.to_packet_loss_total;ctx._source.from_ext_num = params.from_ext_num;ctx._source.to_phone_number = params.to_phone_number;ctx._source.to_ext_num = params.to_ext_num;ctx._source.from_packet_loss_total = params.from_packet_loss_total;ctx._source.from_max_jitter = params.from_max_jitter;ctx._source.to_codec = params.to_codec;ctx._source.to_network = params.to_network;ctx._source.from_ip = params.from_ip;ctx._source.duration = params.duration;ctx._source.from_network = params.from_network;ctx._source.to_min_mos = params.to_min_mos;ctx._source.from_device_type = params.from_device_type;ctx._source.to_account_id = params.to_account_id;ctx._source.to_avg_mos = params.to_avg_mos;ctx._source.from_ext_id = params.from_ext_id;ctx._source.from_avg_mos = params.from_avg_mos;ctx._source.to_location = params.to_location;ctx._source.from_min_mos = params.from_min_mos;ctx._source.to_packet_loss_rote = params.to_packet_loss_rote;ctx._source.from_location = params.from_location;ctx._source.from_user_id = params.from_user_id;ctx._source.from_packet_loss_rate = params.from_packet_loss_rate;ctx._source.from_isp = params.from_isp;ctx._source.from_avg_jitter = params.from_avg_jitter;ctx._source.call_time = params.call_time;ctx._source.from_codec = params.from_codec;ctx._source.from_device_model = params.from_device_model;ctx._source.call_id = params.call_id;ctx._source.to_user_id = params.to_user_id;ctx._source.to_avg_jitter = params.to_avg_jitter;ctx._source.to_isp = params.to_isp;ctx._source.to_device_type = params.to_device_type;ctx._source.from_phone_number = params.from_phone_number;ctx._source.from_account_id = params.from_account_id;ctx._source.to_ip = params.to_ip;ctx._source.to_device_model = params.to_device_model;ctx._source.to_max_jitter = params.to_max_jitter;
-e8fb45cd-f33a-4169-b0f7-a7f565e94792=>if (ctx._source.mos > params.mos) {ctx._source.mos = params.mos}ctx._source.to_ext_id = params.to_ext_id;ctx._source.to_packet_loss_total = params.to_packet_loss_total;ctx._source.from_ext_num = params.from_ext_num;ctx._source.to_phone_number = params.to_phone_number;ctx._source.to_ext_num = params.to_ext_num;ctx._source.from_packet_loss_total = params.from_packet_loss_total;ctx._source.from_max_jitter = params.from_max_jitter;ctx._source.to_codec = params.to_codec;ctx._source.to_network = params.to_network;ctx._source.from_ip = params.from_ip;ctx._source.duration = params.duration;ctx._source.from_network = params.from_network;ctx._source.to_min_mos = params.to_min_mos;ctx._source.from_device_type = params.from_device_type;ctx._source.to_account_id = params.to_account_id;ctx._source.to_avg_mos = params.to_avg_mos;ctx._source.from_ext_id = params.from_ext_id;ctx._source.from_avg_mos = params.from_avg_mos;ctx._source.to_location = params.to_location;ctx._source.from_min_mos = params.from_min_mos;ctx._source.to_packet_loss_rote = params.to_packet_loss_rote;ctx._source.from_location = params.from_location;ctx._source.from_user_id = params.from_user_id;ctx._source.from_packet_loss_rate = params.from_packet_loss_rate;ctx._source.from_isp = params.from_isp;ctx._source.from_avg_jitter = params.from_avg_jitter;ctx._source.call_time = params.call_time;ctx._source.from_codec = params.from_codec;ctx._source.from_device_model = params.from_device_model;ctx._source.call_id = params.call_id;ctx._source.to_user_id = params.to_user_id;ctx._source.to_avg_jitter = params.to_avg_jitter;ctx._source.to_isp = params.to_isp;ctx._source.to_device_type = params.to_device_type;ctx._source.from_phone_number = params.from_phone_number;ctx._source.from_account_id = params.from_account_id;ctx._source.to_ip = params.to_ip;ctx._source.to_device_model = params.to_device_model;ctx._source.to_max_jitter = params.to_max_jitter;
+e8fb45cd-f33a-4169-b0f7-a7f565e94792=>if (ctx._source.mos > params.mos) {ctx._source.mos = params.mos}ctx._source.to_ext_id = params.to_ext_id;ctx._source.to_packet_loss_total = params.to_packet_loss_total;ctx._source.from_ext_num = params.from_ext_num;ctx._source.to_phone_number = params.to_phone_number;ctx._source.to_ext_num = params.to_ext_num;ctx._source.from_packet_loss_total = params.from_packet_loss_total;ctx._source.from_max_jitter = params.from_max_jitter;ctx._source.to_codec = params.to_codec;ctx._source.to_network = params.to_network;ctx._source.from_ip = params.from_ip;ctx._source.duration = params.duration;ctx._source.from_network = params.from_network;ctx._source.to_min_mos = params.to_min_mos;ctx._source.from_device_type = params.from_device_type;ctx._source.to_account_id = params.to_account_id;ctx._source.to_avg_mos = params.to_avg_mos;ctx._source.from_ext_id = params.from_ext_id;ctx._source.from_avg_mos = params.from_avg_mos;ctx._source.to_callerloc = params.to_callerloc;ctx._source.from_min_mos = params.from_min_mos;ctx._source.to_packet_loss_rote = params.to_packet_loss_rote;ctx._source.from_callerloc = params.from_callerloc;ctx._source.from_user_id = params.from_user_id;ctx._source.from_packet_loss_rate = params.from_packet_loss_rate;ctx._source.from_isp = params.from_isp;ctx._source.from_avg_jitter = params.from_avg_jitter;ctx._source.call_time = params.call_time;ctx._source.from_codec = params.from_codec;ctx._source.from_device_model = params.from_device_model;ctx._source.call_id = params.call_id;ctx._source.to_user_id = params.to_user_id;ctx._source.to_avg_jitter = params.to_avg_jitter;ctx._source.to_isp = params.to_isp;ctx._source.to_device_type = params.to_device_type;ctx._source.from_phone_number = params.from_phone_number;ctx._source.from_account_id = params.from_account_id;ctx._source.to_ip = params.to_ip;ctx._source.to_device_model = params.to_device_model;ctx._source.to_max_jitter = params.to_max_jitter;
+e8fb45cd-f33a-4169-b0f7-a7f565e94792=>if (ctx._source.mos > params.mos) {ctx._source.mos = params.mos}ctx._source.to_ext_id = params.to_ext_id;ctx._source.to_packet_loss_total = params.to_packet_loss_total;ctx._source.from_ext_num = params.from_ext_num;ctx._source.to_phone_number = params.to_phone_number;ctx._source.to_ext_num = params.to_ext_num;ctx._source.from_packet_loss_total = params.from_packet_loss_total;ctx._source.from_max_jitter = params.from_max_jitter;ctx._source.to_codec = params.to_codec;ctx._source.to_network = params.to_network;ctx._source.from_ip = params.from_ip;ctx._source.duration = params.duration;ctx._source.from_network = params.from_network;ctx._source.to_min_mos = params.to_min_mos;ctx._source.from_device_type = params.from_device_type;ctx._source.to_account_id = params.to_account_id;ctx._source.to_avg_mos = params.to_avg_mos;ctx._source.from_ext_id = params.from_ext_id;ctx._source.from_avg_mos = params.from_avg_mos;ctx._source.to_callerloc = params.to_callerloc;ctx._source.from_min_mos = params.from_min_mos;ctx._source.to_packet_loss_rote = params.to_packet_loss_rote;ctx._source.from_callerloc = params.from_callerloc;ctx._source.from_user_id = params.from_user_id;ctx._source.from_packet_loss_rate = params.from_packet_loss_rate;ctx._source.from_isp = params.from_isp;ctx._source.from_avg_jitter = params.from_avg_jitter;ctx._source.call_time = params.call_time;ctx._source.from_codec = params.from_codec;ctx._source.from_device_model = params.from_device_model;ctx._source.call_id = params.call_id;ctx._source.to_user_id = params.to_user_id;ctx._source.to_avg_jitter = params.to_avg_jitter;ctx._source.to_isp = params.to_isp;ctx._source.to_device_type = params.to_device_type;ctx._source.from_phone_number = params.from_phone_number;ctx._source.from_account_id = params.from_account_id;ctx._source.to_ip = params.to_ip;ctx._source.to_device_model = params.to_device_model;ctx._source.to_max_jitter = params.to_max_jitter;
 
 
 聚合

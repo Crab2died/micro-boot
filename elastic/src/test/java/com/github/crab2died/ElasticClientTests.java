@@ -61,7 +61,7 @@ public class ElasticClientTests {
     public void insertCallLog() {
 
         CallLog callLog = CallBuilder.buildCallLog(true, true);
-        IndexResponse response = client.prepareIndex("call-log-2018-09", "call_log", callLog.getId())
+        IndexResponse response = client.prepareIndex("call-log-2018-08", "call_log", callLog.getId())
                 .setSource(JSON.toJSONString(callLog), XContentType.JSON)
                 .get();
         System.out.println(response.toString());
@@ -70,9 +70,10 @@ public class ElasticClientTests {
     @Test
     public void insertSample() throws InterruptedException {
         AtomicInteger count = new AtomicInteger(0);
+        AtomicInteger retryCount = new AtomicInteger(0);
         ExecutorService executorService = Executors.newFixedThreadPool(20);
         long time = System.currentTimeMillis();
-        for (int i = 0; i < 30000; i++) {
+        for (int i = 0; i < 500; i++) {
             String callId = UUID.randomUUID().toString();
             int callHash = callId.hashCode() % 2;
             callHash = callHash < 0 ? -callHash : callHash;
@@ -121,6 +122,7 @@ public class ElasticClientTests {
 //                                    .get();
                             client.update(request).get();
                             System.out.println(count.incrementAndGet() + " [retry]=> " + JSON.toJSONString(callLog));
+                            retryCount.incrementAndGet();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -135,7 +137,8 @@ public class ElasticClientTests {
                 break;
             }
         }
-        System.out.println("insert => " + count.get() + ", take time : " + (System.currentTimeMillis() - time) / 1000);
+        System.out.println("insert => " + count.get() + ", retry => " + retryCount.get() + ", take time : " + (System.currentTimeMillis() - time) /
+                1000);
     }
 
     @Test
@@ -289,7 +292,7 @@ public class ElasticClientTests {
             "        \"from_isp\": {\n" +
             "          \"type\": \"keyword\"\n" +
             "        },\n" +
-            "        \"from_location\": {\n" +
+            "        \"from_callerloc\": {\n" +
             "          \"type\": \"text\"\n" +
             "        },\n" +
             "        \"to_account_id\": {\n" +
@@ -343,7 +346,7 @@ public class ElasticClientTests {
             "        \"to_isp\": {\n" +
             "          \"type\": \"keyword\"\n" +
             "        },\n" +
-            "        \"to_location\": {\n" +
+            "        \"to_callerloc\": {\n" +
             "          \"type\": \"text\"\n" +
             "        }\n" +
             "      }\n" +
