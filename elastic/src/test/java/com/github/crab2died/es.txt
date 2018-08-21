@@ -77,7 +77,7 @@ curl -XPUT http:ES-host:9200/call-log-yyyy-MM -d '
           "type": "keyword"
         },
         "from_callerloc": {
-          "type": "text"
+          "type": "keyword"
         },
         "from_position": {
           "type": "array"
@@ -134,7 +134,7 @@ curl -XPUT http:ES-host:9200/call-log-yyyy-MM -d '
           "type": "keyword"
         },
         "to_callerloc": {
-          "type": "text"
+          "type": "keyword"
         },
         "to_position": {
           "type": "array"

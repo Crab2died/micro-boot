@@ -73,7 +73,7 @@ public class ElasticClientTests {
         AtomicInteger retryCount = new AtomicInteger(0);
         ExecutorService executorService = Executors.newFixedThreadPool(20);
         long time = System.currentTimeMillis();
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 150000; i++) {
             String callId = UUID.randomUUID().toString();
             int callHash = callId.hashCode() % 2;
             callHash = callHash < 0 ? -callHash : callHash;
