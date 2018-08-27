@@ -1,4 +1,4 @@
-package com.github.crab2died.config.filter;
+package com.github.crab2died.common.config.filter;
 
 
 import com.alibaba.druid.support.http.WebStatFilter;

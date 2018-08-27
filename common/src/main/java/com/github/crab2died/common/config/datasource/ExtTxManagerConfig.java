@@ -1,4 +1,4 @@
-package com.github.crab2died.config.datasource;
+package com.github.crab2died.common.config.datasource;
 
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.github.crab2died.config.datasource;
+package com.github.crab2died.common.config.datasource;
 
 public enum DataSourceEnum {
 

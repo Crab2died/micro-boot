@@ -1,4 +1,4 @@
-package com.github.crab2died.config.servlet;
+package com.github.crab2died.common.config.servlet;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 

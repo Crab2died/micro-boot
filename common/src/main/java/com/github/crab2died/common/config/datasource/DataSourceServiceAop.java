@@ -1,4 +1,4 @@
-package com.github.crab2died.config.datasource;
+package com.github.crab2died.common.config.datasource;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

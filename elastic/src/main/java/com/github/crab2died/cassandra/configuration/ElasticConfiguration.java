@@ -1,4 +1,4 @@
-package com.github.crab2died.configuration;
+package com.github.crab2died.cassandra.configuration;
 
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;

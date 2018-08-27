@@ -1,4 +1,4 @@
-package com.github.crab2died.config;
+package com.github.crab2died.common.config;
 
 import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import org.springframework.beans.factory.annotation.Autowired;

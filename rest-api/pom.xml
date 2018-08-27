@@ -93,6 +93,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.crab2died</groupId>
+            <artifactId>cassandra</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
