@@ -24,7 +24,7 @@ public class CallSample {
     private String extId;
 
     @Column("ext_num")
-    private int extNuml;
+    private int extNum;
 
     @Column("avg_mos")
     private Float avgMos;
@@ -81,12 +81,12 @@ public class CallSample {
         this.extId = extId;
     }
 
-    public int getExtNuml() {
-        return extNuml;
+    public int getExtNum() {
+        return extNum;
     }
 
-    public void setExtNuml(int extNuml) {
-        this.extNuml = extNuml;
+    public void setExtNum(int extNum) {
+        this.extNum = extNum;
     }
 
     public Float getAvgMos() {

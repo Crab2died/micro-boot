@@ -26,10 +26,11 @@ public class CallSample {
     @JSONField(name = "call_id")
     private String callId;
 
-    @JSONField(name = "call_time")
-    private long callTime;
+    @JSONField(name = "start_call_time")
+    private long startCallTime;
 
-    private Integer duration;
+    @JSONField(name = "end_call_time")
+    private long endCallTime;
 
     @JSONField(name = "ext_id")
     private String extId;
@@ -42,9 +43,6 @@ public class CallSample {
 
     @JSONField(name = "avg_mos")
     private Float avgMos = 0F;
-
-    @JSONField(name = "min_mos")
-    private Float minMos;
 
     @JSONField(name = "device_model")
     private String deviceModel;
@@ -64,8 +62,8 @@ public class CallSample {
     @JSONField(name = "packet_loss_rate")
     private Float packetLossRate;
 
-    @JSONField(name = "packet_loss_total")
-    private Integer packetLossTotal;
+    @JSONField(name = "packet_loss")
+    private Integer packetLoss;
 
     @JSONField(serialize = false)
     private Integer eventual = 0;
@@ -75,6 +73,7 @@ public class CallSample {
     }
 
     public void setTime(long time) {
+        time *= 1000;
         this.time = time;
     }
 
@@ -142,20 +141,22 @@ public class CallSample {
         this.callId = callId;
     }
 
-    public long getCallTime() {
-        return callTime;
+    public long getStartCallTime() {
+        return startCallTime;
     }
 
-    public void setCallTime(long callTime) {
-        this.callTime = callTime;
+    public void setStartCallTime(long startCallTime) {
+        startCallTime *= 1000;
+        this.startCallTime = startCallTime;
     }
 
-    public Integer getDuration() {
-        return duration;
+    public long getEndCallTime() {
+        endCallTime *= 1000;
+        return endCallTime;
     }
 
-    public void setDuration(Integer duration) {
-        this.duration = duration;
+    public void setEndCallTime(long endCallTime) {
+        this.endCallTime = endCallTime;
     }
 
     public String getExtId() {
@@ -188,14 +189,6 @@ public class CallSample {
 
     public void setAvgMos(Float avgMos) {
         this.avgMos = avgMos;
-    }
-
-    public Float getMinMos() {
-        return minMos;
-    }
-
-    public void setMinMos(Float minMos) {
-        this.minMos = minMos;
     }
 
     public String getDeviceModel() {
@@ -254,12 +247,12 @@ public class CallSample {
         this.packetLossRate = packetLossRate;
     }
 
-    public Integer getPacketLossTotal() {
-        return packetLossTotal;
+    public Integer getPacketLoss() {
+        return packetLoss;
     }
 
-    public void setPacketLossTotal(Integer packetLossTotal) {
-        this.packetLossTotal = packetLossTotal;
+    public void setPacketLoss(Integer packetLoss) {
+        this.packetLoss = packetLoss;
     }
 
     public Integer getEventual() {

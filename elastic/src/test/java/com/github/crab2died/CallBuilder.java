@@ -41,7 +41,7 @@ public class CallBuilder {
         callLog.setId(id);
         callLog.setCallId(id);
         callLog.setCallTime(System.currentTimeMillis());
-        callLog.setDuration(random.nextInt(692762));
+        callLog.setDuration((long) random.nextInt(692762));
 
         int fidx = random.nextInt(15);
         int tidx = fidx + 2 > 14 ? 0 : fidx + 2;
@@ -57,7 +57,6 @@ public class CallBuilder {
             callLog.setFromMaxJitter(random.nextInt(500) + fj);
             float fm = random.nextFloat() * 10;
             callLog.setFromAvgMos(fm + random.nextInt(5));
-            callLog.setFromMinMos(fm);
             callLog.setFromCodec(CODEC[fidx % 4]);
             callLog.setFromDeviceType(DEVICE[fidx % 3]);
             callLog.setFromDeviceModel(null);
@@ -67,7 +66,7 @@ public class CallBuilder {
             callLog.setFromNetwork(NT[fidx % 5]);
             callLog.setFromCallerloc(LOCATION[fidx % 6]);
             callLog.setFromPacketLossRate(random.nextFloat());
-            callLog.setFromPacketLossTotal(random.nextInt(16291));
+            callLog.setFromPacketLoss(random.nextInt(16291));
         }
 
         if (to) {
@@ -80,7 +79,6 @@ public class CallBuilder {
             callLog.setToMaxJitter(random.nextInt(500) + tj);
             float tm = random.nextFloat() * 10;
             callLog.setToAvgMos(tm + random.nextInt(5));
-            callLog.setToMinMos(tm);
             callLog.setToCodec(CODEC[tidx % 4]);
             callLog.setToDeviceType(DEVICE[tidx % 3]);
             callLog.setToDeviceModel(null);
@@ -90,7 +88,7 @@ public class CallBuilder {
             callLog.setToNetwork(NT[tidx % 5]);
             callLog.setToCallerloc(LOCATION[tidx % 6]);
             callLog.setToPacketLossRate(random.nextFloat());
-            callLog.setToPacketLossTotal(random.nextInt(16291));
+            callLog.setToPacketLoss(random.nextInt(16291));
         }
 
         if (null == callLog.getFromAvgMos()) {
@@ -116,7 +114,7 @@ public class CallBuilder {
         callLog.setId(callId);
         callLog.setCallId(callId);
         callLog.setCallTime(callTime);
-        callLog.setDuration(callHash * 1050);
+        callLog.setDuration(callHash * 1050L);
 
 
         if (direction == 0) {
@@ -131,7 +129,6 @@ public class CallBuilder {
             float fm = random.nextFloat() * 10;
             callLog.setFromAvgMos(fm + random.nextInt(5));
             callLog.setMos(callLog.getFromAvgMos());
-            callLog.setFromMinMos(fm);
             callLog.setFromCodec(CODEC[random.nextInt(1000) % 4]);
             callLog.setFromDeviceType(DEVICE[random.nextInt(1000) % 3]);
             callLog.setFromDeviceModel(null);
@@ -142,7 +139,7 @@ public class CallBuilder {
             callLog.setFromCallerloc(LOCATION[random.nextInt(1000) % 6]);
             callLog.setFromPosition("[" + LOT[random.nextInt(10)] + "," + LAT[random.nextInt(10)] +"]");
             callLog.setFromPacketLossRate(random.nextFloat());
-            callLog.setFromPacketLossTotal(random.nextInt(16291));
+            callLog.setFromPacketLoss(random.nextInt(16291));
         }
 
         if (direction == 1) {
@@ -156,7 +153,6 @@ public class CallBuilder {
             float tm = random.nextFloat() * 10;
             callLog.setToAvgMos(tm + random.nextInt(5));
             callLog.setMos(callLog.getToAvgMos());
-            callLog.setToMinMos(tm);
             callLog.setToCodec(CODEC[random.nextInt(1000) % 4]);
             callLog.setToDeviceType(DEVICE[random.nextInt(1000) % 3]);
             callLog.setToDeviceModel(null);
@@ -167,7 +163,7 @@ public class CallBuilder {
             callLog.setToCallerloc(LOCATION[random.nextInt(1000) % 6]);
             callLog.setToPosition("[" + LOT[random.nextInt(10)] + "," + LAT[random.nextInt(10)] +"]");
             callLog.setToPacketLossRate(random.nextFloat());
-            callLog.setToPacketLossTotal(random.nextInt(16291));
+            callLog.setToPacketLoss(random.nextInt(16291));
         }
 
         return callLog;
@@ -181,9 +177,9 @@ public class CallBuilder {
         callHash = callHash < 0 ? -callHash : callHash;
         CallSample sample = new CallSample();
         sample.setCallId(callId);
-        sample.setCallTime(callTime);
+        sample.setStartCallTime(callTime);
         sample.setDirection(direction);
-        sample.setDuration(callHash * 1050);
+        sample.setEndCallTime(callTime + callHash * 1050L);
         uIdx = uIdx > 14 ? 0 : uIdx;
         sample.setUserId(USER[uIdx]);
         sample.setAccountId(ACCOUNT[uIdx % 4]);
@@ -194,12 +190,11 @@ public class CallBuilder {
         sample.setMaxJitter(random.nextInt(100) + jitter);
         Float mos = random.nextFloat() * 10;
         sample.setAvgMos(mos + random.nextInt(3));
-        sample.setMinMos(mos);
         sample.setCodec(CODEC[random.nextInt(1000) % 4]);
         sample.setDeviceType(DEVICE[random.nextInt(1000) % 3]);
         sample.setPhoneNumber(PHONE[random.nextInt(1000) % 8]);
         sample.setPacketLossRate(random.nextFloat());
-        sample.setPacketLossTotal(random.nextInt(300));
+        sample.setPacketLoss(random.nextInt(300));
         sample.setIsp(ISP[random.nextInt(1000) % 4]);
         sample.setNetwork(NT[random.nextInt(1000) % 4]);
         sample.setIp(IP[random.nextInt(1000) % 6]);

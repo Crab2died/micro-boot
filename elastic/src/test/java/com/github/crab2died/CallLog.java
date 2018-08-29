@@ -13,7 +13,7 @@ public class CallLog {
     @JSONField(name = "call_time")
     private long callTime;
 
-    private Integer duration;
+    private Long duration;
 
     private Float mos;
 
@@ -65,14 +65,11 @@ public class CallLog {
     @JSONField(name = "from_packet_loss_rate")
     private Float fromPacketLossRate;
 
-    @JSONField(name = "from_packet_loss_total")
-    private Integer fromPacketLossTotal;
+    @JSONField(name = "from_packet_loss")
+    private Integer fromPacketLoss;
 
     @JSONField(name = "from_avg_mos")
     private Float fromAvgMos;
-
-    @JSONField(name = "from_min_mos")
-    private Float fromMinMos;
 
     @JSONField(name = "to_user_id")
     private String toUserId;
@@ -122,14 +119,11 @@ public class CallLog {
     @JSONField(name = "to_packet_loss_rate")
     private Float toPacketLossRate;
 
-    @JSONField(name = "to_packet_loss_total")
-    private Integer toPacketLossTotal;
+    @JSONField(name = "to_packet_loss")
+    private Integer toPacketLoss;
 
     @JSONField(name = "to_avg_mos")
     private Float toAvgMos;
-
-    @JSONField(name = "to_min_mos")
-    private Float toMinMos;
 
     public String getId() {
         return id;
@@ -155,11 +149,11 @@ public class CallLog {
         this.callTime = callTime;
     }
 
-    public Integer getDuration() {
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(Integer duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 
@@ -168,6 +162,9 @@ public class CallLog {
     }
 
     public void setMos(Float mos) {
+        if (Float.isNaN(mos)) {
+            mos = 0F;
+        }
         this.mos = mos;
     }
 
@@ -296,15 +293,18 @@ public class CallLog {
     }
 
     public void setFromPacketLossRate(Float fromPacketLossRate) {
+        if (Float.isNaN(fromPacketLossRate)) {
+            fromPacketLossRate = 0F;
+        }
         this.fromPacketLossRate = fromPacketLossRate;
     }
 
-    public Integer getFromPacketLossTotal() {
-        return fromPacketLossTotal;
+    public Integer getFromPacketLoss() {
+        return fromPacketLoss;
     }
 
-    public void setFromPacketLossTotal(Integer fromPacketLossTotal) {
-        this.fromPacketLossTotal = fromPacketLossTotal;
+    public void setFromPacketLoss(Integer fromPacketLoss) {
+        this.fromPacketLoss = fromPacketLoss;
     }
 
     public Float getFromAvgMos() {
@@ -312,15 +312,10 @@ public class CallLog {
     }
 
     public void setFromAvgMos(Float fromAvgMos) {
+        if (Float.isNaN(fromAvgMos)) {
+            fromAvgMos = 0F;
+        }
         this.fromAvgMos = fromAvgMos;
-    }
-
-    public Float getFromMinMos() {
-        return fromMinMos;
-    }
-
-    public void setFromMinMos(Float fromMinMos) {
-        this.fromMinMos = fromMinMos;
     }
 
     public String getToUserId() {
@@ -448,15 +443,18 @@ public class CallLog {
     }
 
     public void setToPacketLossRate(Float toPacketLossRate) {
+        if (Float.isNaN(toPacketLossRate)) {
+            toPacketLossRate = 0F;
+        }
         this.toPacketLossRate = toPacketLossRate;
     }
 
-    public Integer getToPacketLossTotal() {
-        return toPacketLossTotal;
+    public Integer getToPacketLoss() {
+        return toPacketLoss;
     }
 
-    public void setToPacketLossTotal(Integer toPacketLossTotal) {
-        this.toPacketLossTotal = toPacketLossTotal;
+    public void setToPacketLoss(Integer toPacketLoss) {
+        this.toPacketLoss = toPacketLoss;
     }
 
     public Float getToAvgMos() {
@@ -464,14 +462,9 @@ public class CallLog {
     }
 
     public void setToAvgMos(Float toAvgMos) {
+        if (Float.isNaN(toAvgMos)) {
+            toAvgMos = 0F;
+        }
         this.toAvgMos = toAvgMos;
-    }
-
-    public Float getToMinMos() {
-        return toMinMos;
-    }
-
-    public void setToMinMos(Float toMinMos) {
-        this.toMinMos = toMinMos;
     }
 }
