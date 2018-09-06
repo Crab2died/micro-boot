@@ -30,6 +30,7 @@ public class CallBuilder {
     private static final Float[] LOT = {10.121F, -91.1233F, 143.123F, 83.124F, -24.124F, 121.13434F, 45.1234F, -6.1232F, -122.1112F, -30.12F};
     private static final Float[] LAT = {-12.1231F, 76.12234F, 87.1368F, -63.6321F, 52.532F, 43.1282F, -74.241F, 27.986F, -32.112F, -0.1283F};
 
+
     public static CallLog buildCallLog(boolean from, boolean to) {
         if (!from && !to)
             throw new IllegalArgumentException("must one side is true");
@@ -199,7 +200,8 @@ public class CallBuilder {
         sample.setNetwork(NT[random.nextInt(1000) % 4]);
         sample.setIp(IP[random.nextInt(1000) % 6]);
         sample.setEventual(1);
-        sample.setTime(System.currentTimeMillis());
+        sample.setCallerloc(LOCATION[callHash % 6]);
+        sample.setTime(System.currentTimeMillis() / 1000);
         return sample;
     }
 
@@ -238,10 +240,10 @@ public class CallBuilder {
 //        CallLog callLog = CallBuilder.buildCallLog(UUID.randomUUID().toString(), System.currentTimeMillis(), 2, 0);
 //        System.out.println(JSON.toJSONString(callLog));
         String callId = UUID.randomUUID().toString();
-        CallSample sample0 = CallBuilder.buildCallSample(callId, System.currentTimeMillis(), 2, 0);
+        CallSample sample0 = CallBuilder.buildCallSample(callId, System.currentTimeMillis() / 1000, 2, 0);
         System.out.println(JSON.toJSONString(sample0));
         System.out.println(obj2Map(sample0));
-        CallSample sample1 = CallBuilder.buildCallSample(callId, System.currentTimeMillis(), 3, 1);
+        CallSample sample1 = CallBuilder.buildCallSample(callId, System.currentTimeMillis() / 1000, 3, 1);
         System.out.println(JSON.toJSONString(sample1));
         System.out.println(obj2Map(sample1));
         CallLog callLog = buildCallLog(true, false);

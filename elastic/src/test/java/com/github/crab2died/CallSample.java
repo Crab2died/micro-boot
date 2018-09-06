@@ -65,7 +65,6 @@ public class CallSample {
     @JSONField(name = "packet_loss")
     private Integer packetLoss;
 
-    @JSONField(serialize = false)
     private Integer eventual = 0;
 
     public long getTime() {
