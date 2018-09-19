@@ -1,4 +1,4 @@
-package com.github.crab2died.cassandra.configuration;
+package com.github.crab2died.elastic.configuration;
 
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
@@ -24,6 +24,8 @@ public class ElasticConfiguration {
 
     private String clusterAddress = "localhost:9300";
 
+    private boolean transportSniff = false;
+
     public String getClusterName() {
         return clusterName;
     }
@@ -40,11 +42,19 @@ public class ElasticConfiguration {
         this.clusterAddress = clusterAddress;
     }
 
+    public boolean isTransportSniff() {
+        return transportSniff;
+    }
+
+    public void setTransportSniff(boolean transportSniff) {
+        this.transportSniff = transportSniff;
+    }
+
     @Bean
     public Client createClient() throws UnknownHostException {
         Settings settings = Settings.builder()
                 .put("cluster.name", clusterName)
-                .put("client.transport.sniff", true)
+                .put("client.transport.sniff", transportSniff)
                 .build();
         String[] addresses = clusterAddress.split(",");
         TransportAddress[] transportAddress = new TransportAddress[addresses.length];
